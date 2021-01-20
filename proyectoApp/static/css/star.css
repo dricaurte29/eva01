@@ -1,0 +1,16 @@
+
+
+.lla {
+    
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    color: #e6b322;
+    padding: 0 5px;
+}
+.hpta{
+    font-size: 15px;
+    cursor: pointer;
+    color: black;
+    padding: 0 5px; 
+}

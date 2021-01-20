@@ -1,0 +1,84 @@
+{% extends "proyectoApp/base.html" %}
+
+{% load static %}
+{% block cabezo %}
+<title>Muestra</title>
+{% endblock %}
+{% block content %}
+<section class="page-title">
+	<!-- Container Start -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 offset-md-2 text-center">
+				<!-- Title text -->
+				<h3>Únete</h3>
+			</div>
+		</div>
+	</div>
+	<!-- Container End -->
+</section>
+<!-- page title -->
+
+<!-- contact us start-->
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="contact-us-content p-4">
+                    <h5>Formulario</h5>
+                    <h1 class="pt-3">Gracias por tu interes ;)</h1>
+                    <p>Antes que nada dejanos saber como es tu tienda, por favor llena el formulario con la información de tu tienda.</p>
+                    
+                </div>
+            </div>
+            <div class="col-md-6">
+                    <form  method="POST">
+                        {% csrf_token %}
+                        <fieldset class="p-4">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-12 py-2">
+                                        <input name="nombret" type="text" placeholder="Nombre de la tienda *" class="form-control" required>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 py-2">
+                                        <input name="nombre" type="text" placeholder="Nombre del propietario *" class="form-control" required>
+                                    </div>
+                                    <div class="col-lg-6 pt-2">
+                                        <input name="email" type="email" placeholder="Email *" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 py-2">
+                                        <input name="categoria" type="text" placeholder="Categoria (ej: Ropa y accesorios)" class="form-control" required>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 py-2">
+                                        <input name="insta" type="text" placeholder="Link pagina de Instagram" class="form-control" required>
+                                    </div>
+                                    <div class="col-lg-6 pt-2">
+                                        <input name="face" type="text" placeholder="Link pagina de Facebook" class="form-control" required>
+                                    </div>
+                                </div>
+                                
+                                <textarea name="mensaje" id=""  placeholder="Descripción de la tienda *" class="border w-100 p-3 mt-0 mt-lg-4"></textarea>
+                            
+                            </div>
+
+                           
+                            <div class="btn-grounp">
+                                <button style="background-color: #FF390F; border-color: #FF390F;" type="submit" class="btn btn-primary mt-2 float-right">Enviar</button>
+                            </div>
+                        </fieldset>
+                    </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

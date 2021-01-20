@@ -1,0 +1,240 @@
+{% extends "proyectoApp/base.html" %}
+
+{% load static %}
+{% load humanize %}
+{% block cabezo %}
+<title>Muestra</title>
+{% endblock %}
+{% block content %}
+<section class="hero-area bg-1 text-center overly">
+	<!-- Container Start -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- Header Contetnt -->
+				<div class="content-block">
+					<h1>Muestra tus productos </h1>
+					<p>Únete a esta comunidad de emprendimientos <br> en la que todos pueden crecer</p>
+					<div class="short-popular-category-list text-center">
+						<h2>Categorias Populares</h2>
+						<ul class="list-inline">
+							{% for categoria in categorias %}
+							<li class="list-inline-item">
+								<a href="{% url 'categorias' categoria.nombre %}"><i class="fa fa-tag"></i> {{categoria.nombre}}</a></li>
+							{% endfor %}	
+						</ul>
+					</div>
+					
+				</div>
+				<!-- Advance Search -->
+				<div class="advance-search ">
+						<div class="container">
+							<div class="row justify-content-center ">
+								<div class="col-lg-12 col-md-12 align-content-center">
+										<form action="{% url 'productos' %}" method="GET">
+											<div class="form-row">
+												<div class="form-group col-md-7">
+													<input name="bus" type="text" class="form-control my-2 my-lg-1" id="inputtext4" placeholder="¿Qué estas buscando?">
+												</div>
+
+												<div class="form-group col-md-3">
+													<input type="text" class="form-control my-2 my-lg-1" id="inputLocation4" placeholder="Lugar">
+												</div>
+												<div class="form-group col-md-2 align-self-center">
+													<button style="background-color: #FF390F; border-color: #FF390F;" type="submit" class="btn btn-primary">Buscar</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<!-- Container End -->
+</section>
+
+<!--===================================
+=            Client Slider            =
+====================================-->
+
+
+<!--===========================================
+=            Popular deals section            =
+============================================-->
+
+<section class="popular-deals section bg-gray">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="section-title">
+					<h2>Principales Anuncios</h2>
+					<p>Alguno de estos te puede gustar.</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<!-- offer 01 -->
+			<div class="col-lg-12">
+				<div class="trending-ads-slide">
+				{% for producto in productos %}
+					<div  class="col-sm-12 col-lg-4">
+						<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<div class="price">${{producto.precio|intcomma}}</div>
+			<a href="{% url 'solo' producto.id %}">
+				<img style="height: 275px; width: 420px; object-fit: contain;"  class="card-img-top img-fluid imga" src="{{producto.imagen.url}}" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title"><a href="{% url 'solo' producto.id %}">{{producto.titulo}}</a></h4>
+		    <ul class="list-inline product-meta">
+				<li class="list-inline-item">
+		    		<a ><i class="fa fa-folder-open-o"></i>{{producto.categorian}}</a>
+		    	</li>
+		    	<li class="list-inline-item">
+					<a ><i class="fa fa-calendar"></i>{{producto.created}}</a>
+					
+				</li>
+
+			</ul>
+
+		    <div class="product-ratings">
+		    	<ul class="list-inline">
+					{% if producto.pr >= 0.5 %}
+					<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+					{% else %}
+					<li class="list-inline-item "><i class="fa fa-star"></i></li>
+					{% endif %}
+					{% if producto.pr >= 1.0 %}
+					<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+					{% else %}
+					<li class="list-inline-item "><i class="fa fa-star"></i></li>
+					{% endif %}
+					{% if producto.pr >= 2.0 %}
+					<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+					{% else %}
+					<li class="list-inline-item "><i class="fa fa-star"></i></li>
+					{% endif %}
+					{% if producto.pr >= 3.6 %}
+					<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+					{% else %}
+					<li class="list-inline-item "><i class="fa fa-star"></i></li>
+					{% endif %}
+					{% if producto.pr >= 4.3 %}
+					<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+					{% else %}
+					<li class="list-inline-item "><i class="fa fa-star"></i></li>
+					{% endif %}
+
+		    	</ul>
+		    </div>
+		</div>
+	</div>
+</div>
+
+
+
+					</div>
+				{% endfor %}	
+				</div>
+			</div>
+			
+			
+		</div>
+	</div>
+</section>
+<section class="popular-deals section bg-gray pt-0">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="section-title">
+					<h2>Nuestras tiendas</h2>
+					<p></p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<!-- offer 01 -->
+			<div class="col-lg-12">
+				<div class="trending-ads-slide">
+				{% for t in tiendas %}
+					<div  class="col-sm-12 col-lg-4">
+						<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<!-- <div class="price">$200</div> -->
+			<a href="{% url 'local' t.url %}">
+				<img style="height: 275px; width: 420px; object-fit: cover;" class="card-img-top img-fluid" src="{{t.foto_fondo.url}}" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title"><a href="{% url 'local' t.url %}">{{t.nombre}}</a></h4>
+		    <ul class="list-inline product-meta">
+		    	<li class="list-inline-item">
+		    		<a ><i class="fa fa-location-arrow"></i>{{t.ubicacion}}</a>
+		    	</li>
+		    	<li class="list-inline-item">
+		    		<a ><i class="fa fa-tag"></i>{{t.categoria}}</a>
+		    	</li>
+		    </ul>
+		    <p class="card-text">{{t.descripcion}}</p>
+		    <div style="display: none;" class="product-ratings">
+		    	<ul class="list-inline">
+		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+		    		<li class="list-inline-item"><i class="fa fa-star"></i></li>
+		    	</ul>
+		    </div>
+		</div>
+	</div>
+</div>
+
+
+
+					</div>
+				{% endfor %}	
+				</div>
+			</div>
+			
+			
+		</div>
+	</div>
+</section>
+
+
+<!--==========================================
+=            All Category Section            =
+===========================================-->
+
+
+<!--====================================
+=            Call to Action            =
+=====================================-->
+
+<section class="call-to-action overly bg-3 section-sm">
+	<!-- Container Start -->
+	<div class="container">
+		<div class="row justify-content-md-center text-center">
+			<div class="col-md-8">
+				<div class="content-holder">
+					<h2>Únete y consigue mayor exposición 
+					para tu negocio</h2>
+					<ul class="list-inline mt-30">
+						<li  class="list-inline-item"><a style="background-color: #FF390F; border-color: #FF390F;" class="btn btn-primary" href="/unete">Agrega tu tienda</a></li>
+						<li class="list-inline-item"><a class="btn btn-secondary" href="/tiendas">Ver lista de tiendas</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Container End -->
+</section>
+{% endblock %}

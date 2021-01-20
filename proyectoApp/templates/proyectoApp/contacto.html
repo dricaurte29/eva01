@@ -1,0 +1,57 @@
+{% extends "proyectoApp/base.html" %}
+
+{% load static %}
+{% block content %}
+<section class="page-title">
+	<!-- Container Start -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 offset-md-2 text-center">
+				<!-- Title text -->
+				<h3>Contactanos</h3>
+			</div>
+		</div>
+	</div>
+	<!-- Container End -->
+</section>
+<!-- page title -->
+
+<!-- contact us start-->
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="contact-us-content p-4">
+                    <h5>Contacto</h5>
+                    <h1 class="pt-3">Hola, ¿qué tienes en mente?</h1>
+                    
+                </div>
+            </div>
+            <div class="col-md-6">
+                    <form  method="POST">
+                        {% csrf_token %}
+                        <fieldset class="p-4">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-6 py-2">
+                                        <input name="nombre" type="text" placeholder="Nombre *" class="form-control" required>
+                                    </div>
+                                    <div class="col-lg-6 pt-2">
+                                        <input name="email" type="email" placeholder="Email *" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <textarea name="mensaje" id=""  placeholder="Mensaje *" class="border w-100 p-3 mt-2 mt-lg-4"></textarea>
+                            <div class="btn-grounp">
+                                <button style="background-color: #FF390F; border-color: #FF390F;" type="submit" class="btn btn-primary mt-2 float-right">Enviar</button>
+                            </div>
+                        </fieldset>
+                    </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

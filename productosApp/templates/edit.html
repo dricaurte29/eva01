@@ -1,0 +1,101 @@
+{% extends "proyectoApp/based.html" %}
+
+{% load static %}
+{% block act2 %}
+class="active"
+{% endblock act2 %}
+{% block dash %}
+<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+    <div class="widget dashboard-container my-adslist">
+    <h3 class="widget-header">Editar producto</h3>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="p-4">
+            <div class="form-group">
+                <div class="">
+                    <label for="input-file">Imagen actual</label>
+    
+                 </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <img width="120px" height="200px" style="object-fit: contain;"  src="{{producto.imagen.url}}" alt="image description">
+                    </div>
+                    <div class="col-lg-9 align-self-center">
+
+                        <input  name="imagen" type="file" class="form-control-file mt-2 pt-1 " id="input-file">
+                    </div>
+                    
+                </div>
+                {% if producto.imagen2 %}
+                <div class="">
+                    <label for="input-file">Imagen actual</label>
+    
+                 </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <img width="120px" height="200px" style="object-fit: contain;"  src="{{producto.imagen2.url}}" alt="image description">
+                    </div>
+                    <div class="col-lg-9 align-self-center">
+
+                        <input  name="imagen" type="file" class="form-control-file mt-2 pt-1 " id="input-file">
+                    </div>
+                    
+                </div>
+                {% endif %}
+                {% if producto.imagen3 %}
+                <div class="">
+                    <label for="input-file">Imagen actual</label>
+    
+                 </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <img width="120px" height="200px" style="object-fit: contain;"  src="{{producto.imagen3.url}}" alt="image description">
+                    </div>
+                    <div class="col-lg-9 align-self-center">
+
+                        <input  name="imagen" type="file" class="form-control-file mt-2 pt-1 " id="input-file">
+                    </div>
+                    
+                </div>
+                {% endif %}
+                <div class="row">
+
+                    <div class="col-lg-6 py-2">
+                        <label for="input-file">Nombre</label>
+                        <input type="text" placeholder="Nombre *" value="{{producto.titulo}}"  name="nombre" class="form-control" required>
+                    </div>
+                    <div class="col-lg-6 pt-2">
+                        <label for="input-file">Precio</label>
+                        <input type="number" placeholder="Precio *" value="{{producto.precio}}" name="precio" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+            
+
+             <div class="">
+                <label for="input-file">Categoria</label>
+
+             </div>
+            <select name="categoria" id="" class="form-control w-100">
+                <option value="{{producto.categorian}}">{{producto.categorian}}</option>
+                {% for categoria in categorias %}
+                <option value="{{categoria.nombre}}">{{categoria.nombre}}</option>
+                {% endfor %}
+            </select>
+            <div class="">
+                <label for="input-file">Descripción</label>
+
+             </div>
+            <textarea name="contenido" id="" placeholder="Descripción *"  class="border w-100 p-3 mt-3 mt-lg-4">{{producto.contenido}}</textarea>
+            <div class="btn-grounp">
+                <button style="background-color: #FF390F; border-color: #FF390F;" type="submit" class="btn btn-primary mt-2 float-right">Modificar</button>
+            </div>
+        </fieldset>
+    </form>
+
+</div>
+</div>
+
+
+
+{% endblock dash %}

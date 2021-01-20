@@ -1,0 +1,75 @@
+{% extends "proyectoApp/base.html" %}
+{% block cabezo %}
+<title>Muestra</title>
+{% endblock %}
+{% block content %}
+{% load static %}
+<section class="page-title">
+	<!-- Container Start -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 offset-md-2 text-center">
+				<!-- Title text -->
+				<h3>Mis Tiendas</h3>
+			</div>
+		</div>
+	</div>
+	<!-- Container End -->
+</section>
+<!--==================================
+=            Blog Section            =
+===================================-->
+
+<section class="blog section">
+	<div class="container">
+		<div class="row">
+			
+				{% for tienda in tiendas %}
+                <div class="col-sm-12 col-lg-4 col-md-6">
+                    <!-- product card -->
+<div class="product-item bg-light">
+<div class="card">
+<div class="thumb-content">
+    
+    <a href="{% url 'dashboard' tienda.id %}">
+        <img style="height: 275px; width: 420px; object-fit: cover;"  class="card-img-top img-fluid imga" src="{{tienda.foto_fondo.url}}" alt="Card image cap">
+    </a>
+</div>
+<div class="card-body">
+    <h4 class="card-title"><a href="{% url 'dashboard' tienda.id %}">{{tienda.nombre}}</a></h4>
+    <ul class="list-inline product-meta">
+
+        <li class="list-inline-item">
+            <a href="#"><i class="fa fa-calendar"></i>{{tienda.created}}</a>
+        </li>
+    </ul>
+    <p class="card-text">{{tienda.descripcion}}</p>
+    <div class="product-ratings">
+        <ul class="list-inline">
+            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+        </ul>
+    </div>
+</div>
+</div>
+</div>
+
+
+
+                </div>
+
+				{% endfor %}
+
+				<!-- Pagination -->
+
+			
+
+		</div>
+	</div>
+</section>
+
+
+{% endblock %}

@@ -1,0 +1,135 @@
+{% extends "proyectoApp/based.html" %}
+
+{% load static %}
+{% load humanize %}
+{% block act4 %}
+class="active"
+{% endblock act4 %}
+{% block dash %}
+
+<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+  <!-- Recently Favorited -->
+  <div class="widget dashboard-container my-adslist">
+    <h3>
+      <div class="row">
+        <div class="col-lg-6 align-self-center">
+          Mis anuncios archivados
+        </div>
+        <div class="col-lg-6 text-right align-self-center pr-4">
+          <a id="ls" class="view" 
+          data-container="body" 
+          data-toggle="popover"
+           
+          data-placement="left" 
+          data-content="Los productos que estan aca no son visibles para los clientes, puedes activarlos y que vuelvan a ser visibles en el boton del candado abierto." 
+          title="info"><i class="fa fa-question-circle"></i></a>
+ 
+        </div>
+      </div>
+    </h3>
+
+    {% if entity %}
+    <table class="table table-responsive product-dashboard-table">
+      <thead>
+        <tr>
+          <th>Imagen</th>
+          <th>Titulo</th>
+          <th class="text-center">Categoria</th>
+          <th class="text-center">Acción</th>
+        </tr>
+        
+      </thead>
+      <tbody>
+
+        
+        {% for producto in entity %}
+        
+        <tr>
+
+          <td class="product-thumb">
+            <a href="{% url 'solo' producto.id %}">
+            <img width="80px" height="auto" style="object-fit: contain;"  src="{{producto.imagen.url}}" alt="image description"></td>
+          </a>
+            <td class="product-details">
+            <h3 class="title">{{producto.titulo}}</h3>
+            <span class="add-id"><strong>Ad ID:</strong>{{producto.id}}</span>
+            <span><strong>Posted on: </strong><time>{{producto.created}}</time> </span>
+            
+            <span class="status"><strong>Estatus:</strong>Archivado</span>
+            <span class="location"><strong>Precio:</strong>$ {{producto.precio|intcomma}}</span>
+          </td>
+          <td class="product-category"><span class="categories">{{producto.categoria.nombre}}</span></td>
+          <td class="action" data-title="Action">
+            <div class="">
+              <ul class="list-inline justify-content-center">
+                <li class="list-inline-item">
+                  <a data-toggle="tooltip" data-placement="top" title="activar" class="view" href="{% url 'desarchivar' producto.tienda.id producto.id %}">
+                    <i class="fa fa-unlock"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a class="edit" data-toggle="tooltip" data-placement="top" title="Editar" data-toggle="modal" data-target="#modlax" href="{% url 'edit' tienda.id producto.id %}">
+                    <i class="fa fa-pencil"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a class="delete" data-toggle="tooltip" data-placement="top" title="Eliminar" onclick="abrir_modalel('{% url 'modalel' producto.id %}')">
+                    <i class="fa fa-trash"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+        
+        {% endfor %}
+        {% else %}
+        <section class="section ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center mx-auto">
+                        <div class="404-img">
+                            <img src="{% static 'images/404/no-document.png' %}" class="img-fluid" alt="">
+                        </div>
+                        <div class="404-content">
+                            
+                            <p class="px-3 pb-2 text-dark">No hay anuncios archivados</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+      </tbody>
+    </table>
+
+  </div>
+
+  <!-- pagination -->
+  <div class="pagination justify-content-center">
+    {% include 'proyectoApp/paginator.html' %}
+    </div>
+  <!-- pagination -->
+
+</div>
+  <div class="modal fade" id="elim" role="dialog">
+
+  </div>
+
+
+
+{% endblock dash %}
+
+{% block extrajs %}
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+  function abrir_modalel(url){
+    $('#elim').load(url, function(){
+      $(this).modal('show');
+    });
+  }
+</script>
+{% endblock extrajs %}

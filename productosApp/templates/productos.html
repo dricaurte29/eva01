@@ -1,0 +1,196 @@
+{% extends "proyectoApp/base.html" %}
+
+{% load static %}
+{% load humanize %}
+{% block content %}
+<section class="page-search">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- Advance Search -->
+				<div class="advance-search">
+					<form method="GET">
+						<div class="form-row">
+							<div class="form-group col-md-7">
+								<input name="bus" type="text" class="form-control my-2 my-lg-0" id="inputtext4" placeholder="¿Qué estas buscando?">
+							</div>
+
+							<div class="form-group col-md-3">
+								<input type="text" class="form-control my-2 my-lg-0" id="inputLocation4" placeholder="Lugar">
+							</div>
+							<div class="form-group col-md-2">
+								
+								<button type="submit" style="background-color: #FF390F; border-color: #FF390F;"class="btn btn-primary">Buscar</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="section-sm">
+	<div class="container">
+	{% if nb %}
+		<div class="row">
+			<div class="col-md-12">
+				<div class="search-result bg-gray">
+					<h2>Resultados para "{{nb}}"</h2>
+					<p> {{nbn}} Resultados</p>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+		<div class="row">
+			<div class="col-md-3">
+				<div class="category-sidebar">
+					<div class="widget category-list">
+	<h4 class="widget-header">Categorias</h4>
+	<ul class="category-list">
+		{% for categoria in categorias %}
+		<li><a href="{% url 'categorias' categoria.nombre %}">{{categoria.nombre}} </a></li>
+		{% endfor %}
+	</ul>
+</div>
+
+
+
+<div class="widget filter">
+	
+	<h4 class="widget-header">Mostrar productos</h4>
+	<div class="dropdown">
+		<button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		 <span>Ordenar por</span>  
+		</button>
+		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+		<form action="" method="GET" enctype="multipart/form-data">
+			<input style="display: none;"  value="reciente" type="text" name="ord" readonly class="form-control-plaintext" id="usid" >
+		  <button type="submit" class="dropdown-item">Mas reciente</a>
+		</form>
+		<form action="" method="GET" enctype="multipart/form-data">
+			<input style="display: none;"  value="mayor" type="text" name="ord" readonly class="form-control-plaintext" id="usid" >
+			<button type="submit" class="dropdown-item">Mayor precio</a>
+		  </form>
+		  <form action="" method="GET" enctype="multipart/form-data">
+			<input style="display: none;"  value="menor" type="text" name="ord" readonly class="form-control-plaintext" id="usid" >
+			<button type="submit" class="dropdown-item">Menor precio</a>
+		  </form>
+		</div>
+	  </div>
+	
+</div>
+
+<div class="widget price-range w-100">
+	<h4 class="widget-header">Rango de precio</h4>
+	<form action="" method="GET" enctype="multipart/form-data">
+        
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-5 px-0 pt-0">
+				<input type="number" placeholder="MIN" name="min" class="form-control">
+				
+			</div>
+			<div class="col-lg-2 pl-2  align-self-center">
+				<i class="fa fa-long-arrow-right text-secondary"></i>
+			</div>
+			<div class="col-lg-5 px-0  pt-0 ">
+				<input type="number" placeholder="MAX" name="max" class="form-control">
+				{% if nb %}
+				<input style="display: none;"  value="{{nb}}" type="text" name="bus" readonly class="form-control-plaintext" id="usid" >
+				{% endif %}
+			</div>
+
+		</div>
+		<div class="row">
+			<div class="col-lg-10 pt-2 px-0 align-self-left">
+				<button type="submit" style="color: #FF3E3E;" class="btn  px-0" ><i class="fa fa-level-up"></i> Aplicar</button>
+			</div>
+
+		</div>
+	</div>
+</form>
+</div>
+
+
+
+				</div>
+			</div>
+			<div class="col-md-9">
+		
+				<div class="product-grid-list">
+					<div class="row mt-30">
+            {% for producto in entity %}
+						<div class="col-sm-12 col-lg-4 col-md-6">
+							<!-- product card -->
+<div class="product-item bg-light">
+	<div class="card">
+		<div class="thumb-content">
+			<div class="price">${{producto.precio|intcomma}}</div>
+			<a href="{% url 'solo' producto.id %}">
+				<img style="height: 275px; width: 420px; object-fit: contain;"  class="card-img-top img-fluid imga" src="{{producto.imagen.url}}" alt="Card image cap">
+			</a>
+		</div>
+		<div class="card-body">
+		    <h4 class="card-title"><a href="{% url 'solo' producto.id %}">{{producto.titulo}}</a></h4>
+		    <ul class="list-inline product-meta">
+				<li class="list-inline-item">
+		    		<a ><i class="fa fa-folder-open-o"></i>{{producto.categorian}}</a>
+		    	</li>
+		    	<li class="list-inline-item">
+					<a ><i class="fa fa-calendar"></i>{{producto.created}}</a>
+					
+				</li>
+
+			</ul>
+
+		    <div class="product-ratings">
+		    	<ul class="list-inline">
+					{% if producto.pr >= 0.5 %}
+					<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+					{% else %}
+					<li class="list-inline-item "><i class="fa fa-star"></i></li>
+					{% endif %}
+					{% if producto.pr >= 1.0 %}
+					<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+					{% else %}
+					<li class="list-inline-item "><i class="fa fa-star"></i></li>
+					{% endif %}
+					{% if producto.pr >= 2.0 %}
+					<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+					{% else %}
+					<li class="list-inline-item "><i class="fa fa-star"></i></li>
+					{% endif %}
+					{% if producto.pr >= 3.6 %}
+					<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+					{% else %}
+					<li class="list-inline-item "><i class="fa fa-star"></i></li>
+					{% endif %}
+					{% if producto.pr >= 4.3 %}
+					<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+					{% else %}
+					<li class="list-inline-item "><i class="fa fa-star"></i></li>
+					{% endif %}
+
+		    	</ul>
+		    </div>
+		</div>
+	</div>
+</div>
+
+
+
+						</div>
+            {% endfor %}
+					</div>
+				</div>
+				<div class="pagination justify-content-center">
+					{% include 'proyectoApp/paginator.html' %}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+{% endblock %}

@@ -1,0 +1,50 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Eliminar producto</h2>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <table class="table table-responsive product-dashboard-table">
+                <thead>
+                  <tr>
+                    <th>Imagen</th>
+                    <th >Titulo</th>
+                    <th class="text-center">Categoria</th>
+                    
+                  </tr>
+                  
+                </thead>
+                <tbody>
+  
+  
+                  
+                  <tr>
+  
+                    <td class="product-thumb">
+                      <img width="80px" height="auto" style="object-fit: contain;"  src="{{producto.imagen.url}}" alt="image description"></td>
+                    <td class="product-details">
+                      <h3 class="title">{{producto.titulo}}</h3>
+                      <span class="add-id"><strong>Ad ID:</strong>{{producto.id}}</span>
+                      
+                      <span class="status active"><strong>Status</strong>Active</span>
+                      <span class="location"><strong>Precio</strong>${{producto.precio}}</span>
+                    </td>
+                    <td class="product-category"><span class="categories">{{producto.categoria.nombre}}</span></td>
+
+                  </tr>
+  
+                  
+                </tbody>
+              </table>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" data-dismiss="modal">Cancelar</button>
+            <a class="btn btn-danger" href="{% url 'elimi' producto.tienda.id producto.id %}">Eliminar</a>
+            
+        </div>
+
+    </div>
+</div>

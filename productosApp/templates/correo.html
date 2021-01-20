@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <h1>Pedido {{pedido.id}}</h1>
+    </head>
+    <body>
+        <ul>
+            <li><span><strong>Producto:</strong> {{producto.titulo}}</span></li>
+            <li><span><strong>Cliente:</strong> {{cliente.first_name}} {{cliente.last_name}}</span></li>
+            <li><span><strong>Comentarios:</strong> {{pedido.detalle}}</span></li>
+            <li><span><strong>Cantidad:</strong> {{pedido.cantidad}}</span></li>
+            <li><span><strong>Total:</strong> ${{pedido.precio}}</span></li>
+        </ul>
+    </body>
+</html>

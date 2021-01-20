@@ -1,0 +1,398 @@
+{% extends "proyectoApp/base.html" %}
+
+{% load static %}
+{% load humanize %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/star.css' %}">
+<div class="modal fade" id="pedi" role="dialog">
+
+</div>
+
+<section class="section bg-gray">
+	<!-- Container Start -->
+	<div class="container">
+        {% if producto.estatus == False %} 
+        <div class="alert alert-warning" role="alert">   
+            <span>Anuncio pausado:</span> por el momento no hay stock de este producto.
+          </div>
+        {% endif %}  
+		<div class="row">
+			<!-- Left sidebar -->
+			<div class="col-md-8">
+				<div class="product-details">
+					<h1 class="product-title">{{producto.titulo}}</h1>
+					<div class="product-meta">
+						<ul class="list-inline">
+							<li class="list-inline-item"><i class="fa fa-shopping-basket"></i> Por<a href="">{{tienda.nombre}}</a></li>
+							<li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Categoría<a href="">{{producto.categorian}}</a></li>
+							<li class="list-inline-item"><i class="fa fa-location-arrow"></i> Ubicación<a href="">{{tienda.ubicacion}}</a></li>
+						</ul>
+                    </div>
+
+                     <!--       
+                    <figure style="width: 100%; height: 41rem;" class="figure pt-3">
+                        
+                        <img style="width: 100%; height: 41rem; object-fit: contain;"  class="figure-img img-fluid rounded" src="{{producto.imagen.url}}" alt="Card image cap">
+                        
+                      </figure>
+                    
+                    <div id="lightgallery">
+                        <a href="{{producto.imagen.url}}">
+                            <img src="{{producto.imagen.url}}" />
+                        </a>
+                        <a href="{{producto.imagen.url}}">
+                            <img src="{{producto.imagen.url}}" />
+                        </a>
+                      
+
+                      </div>  
+                    --> 
+                    <body oncontextmenu='return false' class='snippet-body'>
+                        <div class="container-fluid px-sm-1 py-5 mx-auto">
+<div class="row justify-content-center">
+    <div class="d-flex">
+        <div class="card">
+            <div class="d-flex flex-column thumbnails">
+                <div id="f1" class="tb tb-active"> <img style="object-fit: contain;" class="thumbnail-img fit-image" src="{{producto.imagen.url}}"> </div>
+                {% if producto.imagen2 %}
+                <div id="f2" class="tb"> <img  style="object-fit: contain;" class="thumbnail-img fit-image" src="{{producto.imagen2.url}}"> </div>
+                {% endif %}
+                {% if producto.imagen3 %}
+                <div id="f3" class="tb"> <img  style="object-fit: contain;" class="thumbnail-img fit-image" src="{{producto.imagen3.url}}"> </div>
+                {% endif %}
+                
+            </div>
+            <fieldset id="f11" class="active">
+                <div class="product-pic"> <img style="object-fit: contain;" class="pic0" src="{{producto.imagen.url}}"> </div>
+            </fieldset>
+            {% if producto.imagen2 %}
+            <fieldset id="f21" class="">
+                <div class="product-pic"> <img style="object-fit: contain;" class="pic0" src="{{producto.imagen2.url}}"> </div>
+            </fieldset>
+            {% endif %}
+            {% if producto.imagen3 %}
+            <fieldset id="f31" class="">
+                <div class="product-pic"> <img style="object-fit: contain;" class="pic0" src="{{producto.imagen3.url}}"> </div>
+            </fieldset>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+</div>
+                        </body>
+                            
+
+
+				</div>
+			</div>
+			<div class="col-md-4 pt-3">
+				<div class="sidebar">
+					<div class="widget price text-center">
+						<h4>Precio</h4>
+						<p>${{producto.precio|intcomma}}</p>
+					</div>
+					<!-- User Profile widget -->
+					<div class="widget user text-center">
+						<img class="rounded-circle img-fluid mb-5 px-5" src="{{tienda.foto_perfil.url}}" alt="">
+						<h4><a href="{% url 'local' tienda.url %}">{{tienda.nombre}}</a></h4>
+						<p class="member-time">Miembro desde {{tienda.created}}</p>
+						<a href="{% url 'local' tienda.url %}">Ir a la tienda</a>
+						<ul class="list-inline mt-20">
+                          {% if producto.estatus == True %}  
+							<li class="list-inline-item"><a style="background-color: #FF390F; border-color: #FF390F;" class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3" href="{% url 'pedido' tienda.id producto.id %}">Comprar</a></li>
+                          {% endif %}  
+						</ul>
+					</div>
+
+
+				</div>
+			</div>
+
+		</div>
+    </div>
+    <div class="container ">
+        <div class="row">
+           <div class="col-md-8">
+            <div class="product-details">
+            <div class="content mt-5 pt-0">
+                <ul class="nav nav-pills  justify-content-center" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home"
+                         aria-selected="true">Detalles del producto</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact"
+                         aria-selected="false">Reseñas</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <h3 class="tab-title">Descripción</h3>
+                        <textarea style="border: 0;" readonly=True name="" id="" rows="10" class=" w-100  " >{{producto.contenido}}</textarea>
+                         
+
+
+
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                        <h3 class="tab-title">Comentarios</h3>
+                        <div class="product-review">
+                            {% for c in entity %}
+                            <div class="media">
+                                <!-- Avater -->
+                                
+                                <div class="media-body">
+                                    <!-- Ratings -->
+                                    <div class="ratings">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                               {% if c.puntuacion >= 1 %} 
+                                                <i class="fa fa-star"></i>
+                                               {% else %}
+                                               <i class="fa fa-star-o"></i>
+                                               {% endif %}
+                                            </li>
+                                            <li class="list-inline-item">
+                                                {% if c.puntuacion >= 2 %} 
+                                                 <i class="fa fa-star"></i>
+                                                {% else %}
+                                                <i class="fa fa-star-o"></i>
+                                                {% endif %}
+                                             </li>
+                                             <li class="list-inline-item">
+                                                {% if c.puntuacion >= 3 %} 
+                                                 <i class="fa fa-star"></i>
+                                                {% else %}
+                                                <i class="fa fa-star-o"></i>
+                                                {% endif %}
+                                             </li>
+                                             <li class="list-inline-item">
+                                                {% if c.puntuacion >= 4 %} 
+                                                 <i class="fa fa-star"></i>
+                                                {% else %}
+                                                <i class="fa fa-star-o"></i>
+                                                {% endif %}
+                                             </li>
+                                             <li class="list-inline-item">
+                                                {% if c.puntuacion >= 5 %} 
+                                                 <i class="fa fa-star"></i>
+                                                {% else %}
+                                                <i class="fa fa-star-o"></i>
+                                                {% endif %}
+                                             </li>
+                                        </ul>
+                                    </div>
+                                    <div class="name">
+                                        <h5>{{c.autor.username}}</h5>
+                                    </div>
+                                    <div class="date">
+                                        <p>{{c.created}}
+                                        </p>
+                                    </div>
+                                    <div class="review-comment">
+                                        <p>
+                                            {{c.contenido}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                            <div class="review-submission">
+                                <h3 class="tab-title">Envía tu reseña</h3>
+                                <!-- Rate -->
+                                <div class="rate">
+                                    <i class="hpta fa fa-star-o" aria-hidden="true" id="z1"></i>
+                                    <i class="hpta fa fa-star-o" aria-hidden="true" id="z2"></i>
+                                    <i class="hpta fa fa-star-o" aria-hidden="true" id="z3"></i>
+                                    <i class="hpta fa fa-star-o" aria-hidden="true" id="z4"></i>
+                                    <i class="hpta fa fa-star-o" aria-hidden="true" id="z5"></i> 
+                                </div>
+                                <div class="review-submit">
+                                    <form action="#" method="POST" class="row">
+                                        {% csrf_token %}
+                                        <input type="number" value="{{producto.id}}" name="pid"  style="display: none;">
+                                        <input type="number" value="0" name="puntua" id="cal" style="display: none;">
+                                        <input value="{{user.id}}" type="text" name="usid" style="display: none;">
+                                    
+                                        
+
+                                        <div class="col-12">
+                                            <textarea name="Comentario" id="review" rows="10" class="form-control" placeholder="Message"></textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <button style="background-color: #FF390F; border-color: #FF390F;" type="submit" class="btn btn-primary">Enviar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pagination justify-content-center">
+                        {% include 'proyectoApp/paginator.html' %}
+                        </div>
+                </div>
+            </div>
+            </div>
+
+           </div> 
+           <div class="col-md-4">
+            <div class="sidebar">
+
+                
+
+                <!-- Map Widget -->
+                <div class="widget map">
+                    <div class="map">
+                        <div id="map_canvas" data-latitude="51.507351" data-longitude="-0.127758"></div>
+                    </div>
+                </div>
+                <!-- Rate Widget -->
+
+                <div class="widget rate">
+                    <h5 class="widget-header text-center">¿Qué te parece este producto?
+                        <br>
+                        </h5>
+                        <p class="text-center mb-0">
+                    <i class="lla fa fa-star-o" aria-hidden="true" id="s1"></i>
+                    <i class="lla fa fa-star-o" aria-hidden="true" id="s2"></i>
+                    <i class="lla fa fa-star-o" aria-hidden="true" id="s3"></i>
+                    <i class="lla fa fa-star-o" aria-hidden="true" id="s4"></i>
+                    <i class="lla fa fa-star-o" aria-hidden="true" id="s5"></i> 
+                        </p>
+                        <input style="display: none;" di id="res" type="number" value=0>
+                </div>
+        
+                <!-- Safety tips widget -->
+
+                <!-- Coupon Widget -->
+                <div class="widget coupon text-center">
+                    <!-- Coupon description -->
+                    <p>¿ Tienes una tienda ?<br>
+                        Únete y compartela con la comunidad.
+                    </p>
+                    <!-- Submii button -->
+                    <a href="/unete" class="btn btn-transparent-white">Únete</a>
+                </div>
+
+            </div>
+        </div>           
+        </div>
+    </div>
+	<!-- Container End -->
+</section>
+
+{% endblock %}
+
+{% block extrajs %}
+<script src="{% static 'js/star.js' %}"></script>
+<script type="text/javascript">
+
+  function abrir_modalel(url){
+    $('#pedi').load(url, function(){
+      $(this).modal('show');
+    });
+  }
+
+</script>
+
+<style>
+
+.card {
+margin: auto;
+padding: 20px;
+border-radius: 5px;
+margin-top: 5px;
+margin-bottom: 5px
+}
+
+fieldset.active {
+display: block !important
+}
+
+fieldset {
+display: none
+}
+
+.pic0 {
+width: 500px;
+height: 600px;
+margin-left: 85px;
+margin-right: auto;
+display: block
+
+}
+
+.product-pic {
+padding-left: auto;
+padding-right: auto;
+width: 100%
+}
+
+.thumbnails {
+position: absolute
+}
+
+.fit-image {
+width: 100%;
+object-fit: cover
+}
+
+.tb {
+width: 62px;
+height: 62px;
+border: 1px solid grey;
+margin: 2px;
+opacity: 0.4;
+cursor: pointer
+}
+
+.tb-active {
+opacity: 1
+}
+
+.thumbnail-img {
+width: 60px;
+height: 60px
+}
+
+@media screen and (max-width: 768px) {
+.pic0 {
+width: 250px;
+height: 350px
+}
+}</style>
+
+<script type='text/javascript'>$(document).ready(function(){
+
+$(".tb").hover(function(){
+
+$(".tb").removeClass("tb-active");
+$(this).addClass("tb-active");
+
+current_fs = $(".active");
+
+next_fs = $(this).attr('id');
+next_fs = "#" + next_fs + "1";
+
+$("fieldset").removeClass("active");
+$(next_fs).addClass("active");
+
+current_fs.animate({}, {
+step: function() {
+current_fs.css({
+'display': 'none',
+'position': 'relative'
+});
+next_fs.css({
+'display': 'block'
+});
+}
+});
+});
+
+});</script>
+{% endblock extrajs %}

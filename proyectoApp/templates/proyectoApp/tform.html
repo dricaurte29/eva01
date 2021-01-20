@@ -1,0 +1,104 @@
+{% extends "proyectoApp/based.html" %}
+
+{% load static %}
+{% block cabezo %}
+<title>Muestra</title>
+{% endblock %}
+{% block content %}
+<section class="page-title">
+	<!-- Container Start -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 offset-md-2 text-center">
+				<!-- Title text -->
+				<h3>Nueva Tienda</h3>
+			</div>
+		</div>
+	</div>
+	<!-- Container End -->
+</section>
+
+<section class="section-sm pt-4">
+	<div class="container">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="p-4">
+                <div class="form-group">
+                    <div class="">
+                        <label for="input-file">Información de la tienda</label>
+            
+                     </div>
+                    <div class="row">
+                        <div class="col-lg-6 py-2">
+                            <input type="text" placeholder="Nombre *" name="nombre" class="form-control" required>
+                            <input style="display: none;"  value="{{user.id}}" type="number" name="usid" readonly class="form-control-plaintext" id="usid" >
+                        </div>
+
+                        <div class="col-lg-6 pt-2">
+                            <input type="text" placeholder="Ubicación" name="ubicacion" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 py-2">
+                            <input type="text" placeholder="Descripción *" name="descripcion" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="">
+                        <label for="input-file">Redes sociales</label>
+            
+                     </div>
+                    <div class="row">
+                        <div class="col-lg-4 py-2">
+                            <input type="text" placeholder="Link Instagram *" name="insta" class="form-control" >
+                        </div>
+                        <div class="col-lg-4 pt-2">
+                            <input type="text" placeholder="Link Facebook *" name="face" class="form-control" >
+                        </div>
+                        <div class="col-lg-4 pt-2">
+                            <input type="tel" placeholder="Número Whatsapp *" name="num" class="form-control" >
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-6 py-2">
+                            <div class="">
+                                <label for="input-file">Imagen de perfil</label>
+                    
+                             </div>
+            
+                             <div class="form-group choose-file d-inline-flex">
+                                
+                                
+                                <input  name="imagen" type="file" class="form-control-file mt-2 pt-1" id="input-file">
+                             </div>
+                        </div>
+                        <div class="col-lg-6 pt-2">
+                            <div class="">
+                                <label for="input-file">Imagen de fondo</label>
+                    
+                             </div>
+            
+                             <div class="form-group choose-file d-inline-flex">
+                                
+                                
+                                <input  name="imagen2" type="file" class="form-control-file mt-2 pt-1" id="input-file">
+                             </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+        
+                
+                <div class="btn-grounp">
+                    <button type="submit" style="background-color: #FF390F; border-color: #FF390F;" class="btn btn-primary mt-2 float-right">Crear</button>
+                </div>
+            </fieldset>
+        </form>
+</div>
+</section>
+{% endblock %}

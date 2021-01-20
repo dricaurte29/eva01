@@ -1,0 +1,67 @@
+{% extends "proyectoApp/based.html" %}
+
+{% load static %}
+{% block act1 %}
+class="active"
+{% endblock act1 %}
+{% block dash %}
+
+
+<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+    <h3 class="widget-header">Nuevo producto</h3>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="p-4">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-6 py-2">
+                        <input type="text" placeholder="Nombre *" name="nombre" class="form-control" required>
+                    </div>
+                    <div class="col-lg-6 pt-2">
+                        <input type="number" placeholder="Precio *" name="precio" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <label for="input-file">Imagen</label>
+
+             </div>
+             <div class="form-group choose-file d-inline-flex">
+                
+                
+                <input  name="imagen" type="file" class="form-control-file mt-2 pt-1" id="input-file" required>
+             </div>
+             <div class="">
+                <label for="input-file">Imagen 2 (opcional)</label>
+
+             </div>
+             <div class="form-group choose-file d-inline-flex">
+                
+                
+                <input  name="imagen2" type="file" class="form-control-file mt-2 pt-1" id="input-file">
+             </div>
+             <div class="">
+                <label for="input-file">Imagen 3 (opcional)</label>
+
+             </div>
+             <div class="form-group choose-file d-inline-flex">
+                
+                
+                <input  name="imagen3" type="file" class="form-control-file mt-2 pt-1" id="input-file">
+             </div>
+            <select name="categoria" id="" class="form-control w-100">
+                <option value="0">Categoria</option>
+                {% for categoria in categorias %}
+                <option value="{{categoria.nombre}}">{{categoria.nombre}}</option>
+                {% endfor %}
+            </select>
+
+            <textarea name="contenido" id=""  placeholder="Descripción *" class="border w-100 p-3 mt-3 mt-lg-4"></textarea>
+            <div class="btn-grounp">
+                <button style="background-color: #FF390F; border-color: #FF390F;" type="submit" class="btn btn-primary mt-2 float-right">Crear</button>
+            </div>
+        </fieldset>
+    </form>
+
+</div>
+{% endblock dash %}
