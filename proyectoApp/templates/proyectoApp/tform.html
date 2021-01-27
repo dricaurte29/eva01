@@ -1,9 +1,9 @@
-{% extends "proyectoApp/based.html" %}
+{% extends "proyectoApp/base.html" %}
 
 {% load static %}
 {% block cabezo %}
 <title>Muestra</title>
-{% endblock %}
+{% endblock cabezo %}
 {% block content %}
 <section class="page-title">
 	<!-- Container Start -->
@@ -43,6 +43,17 @@
                             <input type="text" placeholder="Descripción *" name="descripcion" class="form-control" required>
                         </div>
                     </div>
+                    <div class="pt-3">
+                        
+                        <label for="">Así será el link de tu tienda, únicamente puede incluir letras y números sin espacios, máximo 20 caracteres </label> 
+                     </div>
+                     <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon3">https://muestra.store/</span>
+                        </div>
+                        <input type="text" name="url" placeholder="mi-tienda" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                      </div>
+ 
                 </div>
                 <div class="form-group">
                     <div class="">
@@ -102,3 +113,4 @@
 </div>
 </section>
 {% endblock %}
+

@@ -61,6 +61,7 @@ def creatienda(request):
         ti.facebook_link = request.POST.get('face')
         ti.foto_perfil = request.FILES.get('imagen')
         ti.foto_fondo = request.FILES.get('imagen2')
+        ti.url = request.POST.get('url')
         us = User()
         us.id = int(request.POST.get('usid'))
         ti.autor = us
@@ -158,11 +159,13 @@ def editienda(request, tienda_id):
         tie.instagram_link = request.POST.get('insta')
         tie.facebook_link = request.POST.get('face')
         tie.whatsapp_link = request.POST.get('num')
+        tie.url = request.POST.get('url')
         if request.FILES.get('perfil'):
             tie.foto_perfil = request.FILES.get('perfil')
         if request.FILES.get('fondo'):
             tie.foto_fondo = request.FILES.get('fondo')
         tie.save()
+        messages.success(request, "Información actualizada")
         return redirect('dashboard', tienda_id= tienda_id)    
     return render(request, "proyectoApp/editienda.html", {"tienda":tie})
 
