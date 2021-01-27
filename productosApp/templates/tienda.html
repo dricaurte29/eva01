@@ -2,32 +2,32 @@
 
 {% load static %}
 {% block cabezo %}
-<title>[ARTICLE_TITLE]</title>
-
+<title>{{tienda.nombre}}</title>
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=600f84e67c7d460011f75b1c&product=inline-share-buttons" async="async"></script>
 
 
 <!-- Some Open Graph tags -->
-<meta name="description" 				content="[ARTICLE_DESCRIPTION]">
-<meta name="author" 					content="[AUTHOR_NAME_OF_THE_ARTICLE]">
-<meta property="og:locale" 				content="en_US"/>
+<meta name="description" 				content="{{tienda.nombre}}">
+<meta name="author" 					content="{{tienda.descripcion}}">
+<meta property="og:locale" 				content="en_ES"/>
 <meta property="og:type" 				content="article"/>
-<meta property="og:title" 				content="[ARTICLE_TITLE]"/>
-<meta property="og:description" 		content="[ARTICLE_DESCRIPTION]"/>
-<meta property="og:url" 				content="[ARTICLE_URL]"/>
-<meta property="og:site_name" 			content="[WEBSITE_NAME]"/>
-<meta property="article:publisher" 		content="[https://www.facebook.com/USERNAME]"/>
-<meta property="article:published_time" content="[PUBLISHED_TIME_OF_YOUR_ARTICLE Ex: 2015-12-08T20:50:00Z]"/>
-   <meta property="og:image" 				content="[MAIN_IMAGE_URL]"/>
+<meta property="og:title" 				content="{{tienda.nombre}}"/>
+<meta property="og:description" 		content="{{tienda.descripcion}}"/>
+<meta property="og:url" 				content="muestra.store:8000/{{tienda.url}}"/>
+<meta property="og:site_name" 			content="muestra.store"/>
+<meta property="article:publisher" 		content="{{tienda.facebook_link}}"/>
+<meta property="article:published_time" content="{{producto.created}}"/>
+   <meta property="og:image" 				content="{{producto.foto_perfil.url}}"/>
 	
 
-<meta name="twitter:title" 				content="[ARTICLE_TITLE]"/>
-<meta name="twitter:description" 		content="[ARTICLE_DESCRIPTION]"/>
-<meta name="twitter:image" 				content="[MAIN_IMAGE_URL]"/>
+<meta name="twitter:title" 				content="{{tienda.nombre}}"/>
+<meta name="twitter:description" 		content="{{tienda.descripcion}}"/>
+<meta name="twitter:image" 				content="{{tienda.foto_perfil}}"/>
 <meta name="twitter:site" 				content="@[TWITTER_USERNAME]"/>
 <meta name="twitter:creator" 			content="@[TWITTER_USERNAME]"/>
 <meta name="twitter:via" 				content="[TWITTER_USERNAME]"/>
 <meta name="twitter:card" 				content="photo"/>
-<meta name="twitter:url" 				content="[ARTICLE_URL]"/>
+<meta name="twitter:url" 				content="muestra.store"/>
 {% endblock cabezo %}
 {% block content %}
 <div id="fb-root"></div>
@@ -41,7 +41,7 @@
 				<div class="content-block">
 					<h1>{{tienda.nombre}}</h1>
 					<p>{{tienda.descripcion}}</p>
-					<div class="short-popular-category-list text-center">
+					
 						<h2>Redes Sociales</h2>
 						<ul class="list-inline">
 							
@@ -71,12 +71,16 @@
 			<div class="col-md-4">
                 <div class="widget user text-center">
                     <img class="rounded-circle img-fluid mb-5 px-5" src="{{tienda.foto_perfil.url}}" alt="">
-                    <h4><a href="">{{tienda.nombre}}</a></h4>
+					<h4><a href="">{{tienda.nombre}}</a></h4>
+					<div class="sharethis-inline-share-buttons"></div>
                     <p class="member-time">Desde {{tienda.created}}</p>
                     
                     <ul class="list-inline mt-20">
                         <li class="list-inline-item"><a href="https://wa.me/57{{tienda.whatsapp_link}}" style="background-color: #25d366; border-color: #25d366;" class="btn btn-primary rounded-pill " href="#"><i class="fa fa-whatsapp"></i> Contactar</a></li>
-                        
+						<li class="mt-2">
+							<p>Compartir</p>
+							<div class="sharethis-inline-share-buttons"></div>
+						</li>
                     </ul>
                 </div>
 				<div class="category-sidebar">

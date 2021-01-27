@@ -16,7 +16,7 @@ def estrella(request):
 
 def home(request):
     categorias=categoria.objects.all()
-    productos=producto.objects.all()
+    productos=producto.objects.filter(estatus= True)
     productos=productos.order_by('?')
     tiendas=tienda.objects.all()
     tiendas=tiendas.order_by('?')
