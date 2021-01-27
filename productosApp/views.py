@@ -203,7 +203,7 @@ def edit(request, tienda_id, producto_id):
 
         prd.categorian = request.POST.get('categoria') 
         prd.save()
-
+        messages.success(request, f"Anuncio actualizado")
 
         #print('printing POST::: ', request.POST)
         return redirect('dashboard', tienda_id= tienda_id)

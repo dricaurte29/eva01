@@ -18,10 +18,10 @@
             <div class="widget user-dashboard-profile">
               <!-- User Image -->
               <div class="profile-thumb">
-                <img src="{{tienda.foto_perfil.url}}" alt="" class="rounded-circle">
+                <a href="{% url 'local' tienda.url %}"><img src="{{tienda.foto_perfil.url}}" alt="" class="rounded-circle"></a>
               </div>
               <!-- User Name -->
-              <h5 class="text-center">{{tienda.nombre}}</h5>
+              <a href="{% url 'local' tienda.url %}"><h5 class="text-center">{{tienda.nombre}}</h5></a>
               <p>Desde {{tienda.created}}</p>
               
               <a style="background-color: #FF390F; border-color: #FF390F;" href="{% url 'editar' tienda.id %}" class="btn btn-primary">Editar perfil</a>
