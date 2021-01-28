@@ -4,7 +4,7 @@
 {% block cabezo %}
 <title>{{tienda.nombre}}</title>
 <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=600f84e67c7d460011f75b1c&product=inline-share-buttons" async="async"></script>
-
+<link rel="stylesheet" href="{% static 'css/star.css' %}">
 
 <!-- Some Open Graph tags -->
 <meta name="description" 				content="{{tienda.nombre}}">
@@ -91,15 +91,18 @@
 
 					  
 {% if tienda.instagram_post %}
-<div style="height: 500px;" class="embed-responsive widget filter ">
-	<iframe class=" " height="500" src="{{tienda.instagram_post}}embed" allowfullscreen></iframe>
+
+<div  class="cajica">
+	<iframe   src="{{tienda.instagram_post}}embed" allowfullscreen></iframe>
 </div>
 
 {% endif %}
-<div style="height: 500px;" class="embed-responsive widget filter ">
-	<div class="fb-post embed-responsive-item" data-href="{{tienda.facebook_post}}" data-width="300"></div>
-</div>	
+{% if tienda.facebook_post %}
+<div  class="cajica">
+	<iframe   src="{{tienda.facebook_post}}embed" allowfullscreen></iframe>
+</div>
 
+{% endif %}
 
 
 

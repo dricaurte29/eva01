@@ -14,3 +14,14 @@
     color: black;
     padding: 0 5px; 
 }
+.cajica{
+    width: 100%;
+    height: 0;
+    padding-bottom: 149%;
+    position: relative;
+}
+.cajica iframe{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}

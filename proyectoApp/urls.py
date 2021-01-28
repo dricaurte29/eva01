@@ -14,6 +14,7 @@ urlpatterns = [
     path('dashboard/<int:tienda_id>/',views.dashboard, name="dashboard"),
     path('archivados/<int:tienda_id>/',views.archivados, name="archivados"),
     path('pedidos/<int:tienda_id>/',views.pedi, name="pedidos"),
+    path('ipost/<int:tienda_id>/',views.ipost,name="ipost"),
     path('cn/<int:producto_id>/',views.modalel, name="modalel"),
     path('ped/<int:pedido_id>/',views.modalpe, name="modalpe"),
     path('entra', views.entra , name="entra"),

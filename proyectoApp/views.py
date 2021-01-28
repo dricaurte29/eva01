@@ -112,7 +112,23 @@ def archivados(request, tienda_id):
         raise Http404
     return render(request, "proyectoApp/archivados.html", {"tienda":tien, "entity":productos, "pc":pc, "mac":mac, "arc":arc, "paginator":paginator})
 
-
+def ipost(request, tienda_id):
+    tien = tienda.objects.get(id=tienda_id)
+    prod=producto.objects.filter(tienda_id= tienda_id, estatus= True)
+    mac = prod.count()
+    productos=producto.objects.filter(tienda_id= tienda_id, estatus= False)
+    arc = productos.count()
+    pedidos=pedido.objects.filter(local_id =tienda_id, enviado= False)         
+    pc = pedidos.count()
+    if request.method == 'POST':
+        if request.POST.get('insta'):
+            tien.instagram_post = request.POST.get('insta')
+        if request.POST.get('insta2'):
+            tien.facebook_post = request.POST.get('insta2')
+        tien.save()
+        messages.success(request, "Post actualizado")
+    return render(request, "proyectoApp/ipost.html",{"tienda":tien, "pc":pc, "mac":mac, "arc":arc})
+    
 
 def pedi(request, tienda_id):
     tien=tienda.objects.get(id= tienda_id)
@@ -122,7 +138,7 @@ def pedi(request, tienda_id):
     arc = productos.count()
     busqueda = request.GET.get('bus')
     if busqueda:
-        pedidos = pedido.objects.filter(enviado=False)
+        pedidos = pedido.objects.filter(local_id =tienda_id,enviado=False)
         pedidos = pedidos.filter(id=int(busqueda))
     else:
         pedidos=pedido.objects.filter(local_id =tienda_id, enviado= False)         
