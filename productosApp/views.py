@@ -7,6 +7,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.contrib import messages
+import os
 
 def send_email(pe):
     template = get_template('correo.html')
@@ -172,7 +173,9 @@ def envia(request, tienda_id, pedido_id):
 def elimi(request, tienda_id, producto_id):
 
     prd = producto.objects.get(id= producto_id)
+
     prd.delete()
+    messages.success(request, f"Producto eliminado")
     return redirect('dashboard', tienda_id= tienda_id)
 
 def edit(request, tienda_id, producto_id):
@@ -235,7 +238,7 @@ def form(request, tienda_id):
         pr.categorian = request.POST.get('categoria')
         
         pr.save()
-
+        messages.success(request, f"Producto creado")
         print('printing POST::: ', request.POST)
         return redirect('dashboard', tienda_id= tienda_id)
     return render(request, "formpro.html", {"tienda": tien, "categorias":categorias, "pc":pc, "mac":mac, "arc":arc})

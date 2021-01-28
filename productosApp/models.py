@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import os
 
 
 class tienda(models.Model):
@@ -18,6 +19,11 @@ class tienda(models.Model):
     ubicacion =models.CharField(max_length=30)
     categoria = models.CharField(max_length=30)
     url = models.CharField(max_length=30)
+
+    def delete(self, *args, **kwargs):
+        if os.path.isfile(self.foto_perfil.path):
+            os.remove(self.foto_perfil.path)
+        super(tienda, self).delete(*args, **kwargs)
     class meta:
         verbose_name='tienda'
         verbose_name_plural='tiendas'
@@ -52,7 +58,14 @@ class producto(models.Model):
     nr=models.IntegerField(default=0)
     tr=models.IntegerField(default=0)
     pr=models.FloatField(default=0)
-
+    def delete(self, *args, **kwargs):
+        if os.path.isfile(self.imagen.path):
+            os.remove(self.imagen.path)
+        if os.path.isfile(self.imagen2.path):
+            os.remove(self.imagen2.path)
+        if os.path.isfile(self.imagen3.path):
+            os.remove(self.imagen3.path)
+        super(producto, self).delete(*args, **kwargs)
     class meta:
         verbose_name='post'
         verbose_name_plural='postes'

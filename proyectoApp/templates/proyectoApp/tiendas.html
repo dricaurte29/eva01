@@ -56,21 +56,15 @@
 <h4 class="card-title"><a href="{% url 'local' t.url %}">{{t.nombre}}</a></h4>
 <ul class="list-inline product-meta">
 <li class="list-inline-item">
-	<a href=""><i class="fa fa-folder-open-o"></i>categoria</a>
+	<a href=""><i class="fa fa-folder-open-o"></i>{{t.categoria}}</a>
 </li>
 <li class="list-inline-item">
-	<a href="#"><i class="fa fa-calendar"></i>{{t.created}}</a>
+	<a><i class="fa fa-calendar"></i>{{t.created}}</a>
 </li>
 </ul>
 <p class="card-text">{{t.descripcion}}</p>
 <div class="product-ratings">
-<ul class="list-inline">
-	<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-	<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-	<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-	<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-	<li class="list-inline-item"><i class="fa fa-star"></i></li>
-</ul>
+
 </div>
 </div>
 </div>

@@ -48,7 +48,7 @@
 	<h4 class="widget-header">Categorias</h4>
 	<ul class="category-list">
 		{% for categoria in categorias %}
-		<li><a href="{% url 'categorias' categoria.nombre %}">{{categoria.nombre}} </a></li>
+		<li><a href="/productos?bus={{categoria.nombre}}">{{categoria.nombre}} </a></li>
 		{% endfor %}
 	</ul>
 </div>

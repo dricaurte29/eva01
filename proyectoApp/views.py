@@ -50,7 +50,7 @@ def local(request, tienda_url):
     return render(request, "proyectoApp/tienda.html",{"tienda":tien, "categorias": categorias, "productos":productos})
 
 def creatienda(request):
-
+    categorias = categoria.objects.all()
     if request.method == 'POST':
         ti = tienda()
         ti.nombre = request.POST.get('nombre')
@@ -62,13 +62,17 @@ def creatienda(request):
         ti.foto_perfil = request.FILES.get('imagen')
         ti.foto_fondo = request.FILES.get('imagen2')
         ti.url = request.POST.get('url')
+        if request.POST.get('otra'):
+            ti.categoria = request.POST.get('otra')
+        else:
+            ti.categoria = request.POST.get('cate')
         us = User()
         us.id = int(request.POST.get('usid'))
         ti.autor = us
         ti.save()
         messages.success(request, "Tienda Creada")
         return redirect('inicio')
-    return render(request, "proyectoApp/tform.html")
+    return render(request, "proyectoApp/tform.html",{"categorias":categorias})
 
 def tiendash(request, us_id):
     tien=tienda.objects.filter(autor_id= us_id)

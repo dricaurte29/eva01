@@ -1,4 +1,4 @@
-
+ 
     $(document).ready(function(){
       $('#s1').hover(function(){
           $('#s5,#s4,#s3,#s2,#s1').removeClass('fa-star');

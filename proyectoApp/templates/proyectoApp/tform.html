@@ -51,9 +51,29 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon3">https://muestra.store/</span>
                         </div>
-                        <input type="text" name="url" placeholder="mi-tienda" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                        <input type="text" pattern="[A-Za-z0-9_-]{1,15}" name="url" placeholder="mi-tienda" class="form-control" id="basic-url" aria-describedby="basic-addon3" required>
                       </div>
  
+                </div>
+                <div class="form-group">
+                    <div>
+                        <label>Categoría</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 py-2">
+                            <select name="cate" id="" class="form-control w-100">
+                                <option value="0">Categoria</option>
+                                {% for categoria in categorias %}
+                                <option value="{{categoria.nombre}}">{{categoria.nombre}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-lg-6 pt-2">
+                            <input type="text" placeholder="Otra" name="otra" class="form-control">
+                        </div>
+                    </div>
+
                 </div>
                 <div class="form-group">
                     <div class="">
@@ -62,13 +82,13 @@
                      </div>
                     <div class="row">
                         <div class="col-lg-4 py-2">
-                            <input type="text" placeholder="Link Instagram *" name="insta" class="form-control" >
+                            <input type="text" placeholder="Link Instagram *" name="insta" class="form-control" required>
                         </div>
                         <div class="col-lg-4 pt-2">
-                            <input type="text" placeholder="Link Facebook *" name="face" class="form-control" >
+                            <input type="text" placeholder="Link Facebook *" name="face" class="form-control" required>
                         </div>
                         <div class="col-lg-4 pt-2">
-                            <input type="tel" placeholder="Número Whatsapp *" name="num" class="form-control" >
+                            <input type="tel" placeholder="Número Whatsapp *" name="num" class="form-control" required>
                         </div>
                     </div>
                 </div>
@@ -83,7 +103,7 @@
                              <div class="form-group choose-file d-inline-flex">
                                 
                                 
-                                <input  name="imagen" type="file" class="form-control-file mt-2 pt-1" id="input-file">
+                                <input  name="imagen" type="file" class="form-control-file mt-2 pt-1" id="input-file" required>
                              </div>
                         </div>
                         <div class="col-lg-6 pt-2">
@@ -95,7 +115,7 @@
                              <div class="form-group choose-file d-inline-flex">
                                 
                                 
-                                <input  name="imagen2" type="file" class="form-control-file mt-2 pt-1" id="input-file">
+                                <input  name="imagen2" type="file" class="form-control-file mt-2 pt-1" id="input-file" required>
                              </div>
                         </div>
                     </div>

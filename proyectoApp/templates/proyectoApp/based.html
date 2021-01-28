@@ -18,7 +18,7 @@
             <div class="widget user-dashboard-profile">
               <!-- User Image -->
               <div class="profile-thumb">
-                <a href="{% url 'local' tienda.url %}"><img src="{{tienda.foto_perfil.url}}" alt="" class="rounded-circle"></a>
+                <a href="{% url 'local' tienda.url %}"><img style="width: 200px; height: 200px; object-fit: cover;" src="{{tienda.foto_perfil.url}}" alt="" class="rounded-circle"></a>
               </div>
               <!-- User Name -->
               <a href="{% url 'local' tienda.url %}"><h5 class="text-center">{{tienda.nombre}}</h5></a>
