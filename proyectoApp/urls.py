@@ -17,6 +17,7 @@ urlpatterns = [
     path('ipost/<int:tienda_id>/',views.ipost,name="ipost"),
     path('cn/<int:producto_id>/',views.modalel, name="modalel"),
     path('ped/<int:pedido_id>/',views.modalpe, name="modalpe"),
+    path('ent/<int:producto_id>/<int:tienda_id>/',views.modalme, name="modalme"),
     path('entra', views.entra , name="entra"),
     path('salir', views.salir , name="salir"),
     path('registro', views.registro, name="registro"),

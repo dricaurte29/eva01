@@ -128,8 +128,14 @@
 						<a href="{% url 'local' tienda.url %}">Ir a la tienda</a>
 						<ul class="list-inline mt-20">
                           {% if producto.estatus == True %}  
-							<li class="list-inline-item"><a style="background-color: #FF390F; border-color: #FF390F;" class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3" href="{% url 'pedido' tienda.id producto.id %}">Comprar</a></li>
-                          {% endif %} 
+                          {% if user.is_authenticated %}
+                            <li class="list-inline-item"><a style="background-color: #FF390F; border-color: #FF390F;" class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3" href="{% url 'pedido' tienda.id producto.id %}">Comprar</a></li>
+                          {% else %} 
+                            <li class="list-inline-item"><button style="background-color: #FF390F; border-color: #FF390F;" class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3" onclick="abrir_modalel('{% url 'modalme' producto.id tienda.id %}')">Comprar</button></li>
+
+                          {% endif %}  
+                            {% endif %} 
+                            
                            <!--
                             <li><div class="share-buttons-row">
                                 
@@ -333,20 +339,28 @@
     </div>
 	<!-- Container End -->
 </section>
+<div class="modal fade" id="elim" role="dialog">
 
+</div>
 {% endblock %}
+
+
 
 {% block extrajs %}
 <script src="{% static 'js/star.js' %}"></script>
 <script src="{% static 'js/functions.js' %}"></script>
 <script type="text/javascript">
 
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
   function abrir_modalel(url){
-    $('#pedi').load(url, function(){
+    $('#elim').load(url, function(){
       $(this).modal('show');
     });
   }
 
+ 
 </script>
 
 <style>

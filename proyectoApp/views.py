@@ -221,6 +221,9 @@ def modalel(request, producto_id):
 
     return render(request, "proyectoApp/modalel.html", {"producto":pro})
 
+def modalme(request, producto_id, tienda_id):
+    return render(request, "proyectoApp/modalme.html",{"pro":producto_id,"tie":tienda_id})
+
 def modalpe(request, pedido_id):
     ped = pedido.objects.get(id=pedido_id)
 
@@ -259,7 +262,10 @@ def entra(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f"estas adentro {user.username}")
-                return redirect('/')
+                if request.GET.get('sig'):
+                    return redirect('pedido', tienda_id=request.GET.get('sig'), producto_id=request.GET.get('pr') )
+                else:
+                    return redirect('/')
             else:
                 messages.info(request, "Datos incorrectos")
         else:

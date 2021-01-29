@@ -42,91 +42,70 @@
 <body class="body-wrapper">
 
 
-<section>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<nav class="navbar navbar-expand-lg navbar-light navigation">
-					<a class="navbar-brand" href="{% url 'inicio' %}">
-						<img src="{% static 'images/logo.png' %}" alt="">
-					</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav ml-auto main-nav ">
-							<li class="nav-item {% if request.path == '/' %} active {% endif %} ">
-								<a class="nav-link" href="{% url 'inicio' %}">Inicio</a>
-							</li>
-							<li class="nav-item {% if request.path == '/productos' %} active {% endif %} ">
-								<a class="nav-link" href="{% url 'productos' %}">Productos</a>
-              </li>
-              <li class="nav-item {% if request.path == '/tiendas' %} active {% endif %} ">
-								<a class="nav-link" href="{% url 'tiendas' %}">Tiendas</a>
-							</li>
-							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Pages <span><i class="fa fa-angle-down"></i></span>
-								</a>
-								<!-- Dropdown list -->
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="about-us.html">About Us</a>
-									<a class="dropdown-item" href="contact-us.html">Contact Us</a>
-									<a class="dropdown-item" href="user-profile.html">User Profile</a>
-									<a class="dropdown-item" href="404.html">404 Page</a>
-									<a class="dropdown-item" href="package.html">Package</a>
-									<a class="dropdown-item" href="single.html">Single Page</a>
-									<a class="dropdown-item" href="store.html">Store Single</a>
-									<a class="dropdown-item" href="single-blog.html">Single Post</a>
-									<a class="dropdown-item" href="blog.html">Blog</a>
-
-								</div>
-							</li>
-							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Listing <span><i class="fa fa-angle-down"></i></span>
-								</a>
-								<!-- Dropdown list -->
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="category.html">Ad-Gird View</a>
-									<a class="dropdown-item" href="ad-listing-list.html">Ad-List View</a>
-								</div>
-              </li>
-              <li class="nav-item {% if request.path == '/productos' %} active {% endif %} ">
-								<a class="nav-link" href="/admin">Admin</a>
-							</li>
-						</ul>
-						<ul class="navbar-nav ml-auto mt-10">
-              {% if user.is_authenticated %}
-							<li class="nav-item">
-                {% if user.groups.all %}
-                
-                <a style="border-color: #FF73CC; color: #FF73CC;" class="nav-link login-button" href="{% url 'mistiendas' user.id %}"><i class="fa fa-user"></i>  {{user.username}}</a>
-                {% else %}
-                <a style="border-color: #FF390F; color: #FF390F;" class="nav-link login-button" href="{% url 'productos' %}"><i class="fa fa-user"></i>  {{user.username}}</a>
-                {% endif %}
-              </li>
-              <li class="nav-item">
-                <a style="border-color:#FF3E3E; background-color:#FF3E3E; color: white;" class="nav-link login-button" href="/salir"><i class="fa fa-power-off"></i> Logout</a>
-              </li>
-                {% else %}
-                <li class="nav-item">
-                  <a class="nav-link login-button" href="/entra">Ingresa</a>
-                
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link text-white add-button" href="/registro"><i class="fa fa-plus-circle"></i> Únete</a>
-                </li>
-              {% endif %}
-
-						</ul>
-					</div>
-				</nav>
-			</div>
-		</div>
-	</div>
-</section>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar navbar-expand-lg navbar-light navigation">
+                        <a class="navbar-brand" href="/">
+                            <img src="{% static 'images/logo.png' %}" alt="">
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto main-nav ">
+                                <li class="nav-item {% if request.path == '/' %} active {% endif %} ">
+                                    <a class="nav-link" href="/">Inicio</a>
+                                </li>
+                                <li class="nav-item {% if request.path == '/productos' %} active {% endif %} ">
+                                    <a class="nav-link" href="{% url 'productos' %}">Productos</a>
+                  </li>
+                  <li class="nav-item {% if request.path == '/tiendas' %} active {% endif %} ">
+                                    <a class="nav-link" href="{% url 'tiendas' %}">Tiendas</a>
+                                </li>
+                    
+                  
+                  <li class="nav-item {% if request.path == '/contacto' %} active {% endif %} ">
+                                    <a class="nav-link" href="/contacto">Contacto</a>
+                  </li>
+                  {% if user.id == 1 %}
+                  <li class="nav-item {% if request.path == '/productos' %} active {% endif %} ">
+                                    <a class="nav-link" href="/admin">Admin</a>
+                  </li>
+                  {% endif %}
+                            </ul>
+                            <ul class="navbar-nav ml-auto mt-10">
+                  {% if user.is_authenticated %}
+                                <li class="nav-item">
+                    {% if user.groups.all %}
+                    
+                    <a style="border-color: #FF73CC; color: #FF73CC;" class="nav-link login-button" href="{% url 'mistiendas' user.id %}"><i class="fa fa-user"></i>  {{user.first_name}}</a>
+                    {% else %}
+                    <a style="border-color: #FF390F; color: #FF390F;" class="nav-link login-button" href="{% url 'productos' %}"><i class="fa fa-user"></i>  {{user.first_name}}</a>
+                    {% endif %}
+                  </li>
+                  <li class="nav-item">
+                    <a style="border-color:#FF3E3E; background-color:#FF3E3E; color: white;" class="nav-link login-button" href="/salir"><i class="fa fa-power-off"></i> Logout</a>
+                  </li>
+                    {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link login-button" href="/entra">Ingresa</a>
+                    
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link text-white add-button" href="/registro"><i class="fa fa-plus-circle"></i> Únete</a>
+                    </li>
+                  {% endif %}
+    
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
 
 <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -184,7 +163,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-lg-6 py-2">
-                                    <input type="text" placeholder="Nombre *" value="{{user.username}}" name="nombre" class="form-control" required>
+                                    <input type="text" placeholder="Nombre *" value="{{user.first_name}} {{user.last_name}} " name="nombre" class="form-control" required>
                                 </div>
                                 <div class="col-lg-6 pt-2">
                                     <input type="email" placeholder="Email *" value="{{user.email}}" name="email" class="form-control" required>
