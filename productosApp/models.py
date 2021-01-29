@@ -101,7 +101,7 @@ class comentario(models.Model):
     puntuacion = models.IntegerField()
     created=models.DateField(auto_now_add=True)
     updated=models.DateField(auto_now_add=True)
-    contenido=models.CharField(max_length=140)
+    contenido=models.CharField(max_length=140, null=True)
     class meta:
         verbose_name='comentario'
         verbose_name_plural='comentarios'

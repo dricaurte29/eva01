@@ -47,7 +47,23 @@ def local(request, tienda_url):
     tien=tienda.objects.get(url= tienda_url)
     categorias=categoria.objects.all()
     productos=producto.objects.filter(tienda_id= tien.id)
-    return render(request, "proyectoApp/tienda.html",{"tienda":tien, "categorias": categorias, "productos":productos})
+    orden = request.GET.get('ord')
+    page = request.GET.get('page',1)
+    if orden:
+        if orden == "reciente":
+            productos = productos.order_by('-created')
+        elif orden == "menor":
+            productos = productos.order_by('precio')
+        elif orden == "mayor":
+            productos = productos.order_by('-precio')  
+    
+    try:
+            paginator = Paginator(productos, 6)
+            productos = paginator.page(page)
+    except:
+        raise Http404 
+
+    return render(request, "proyectoApp/tienda.html",{"paginator":paginator,"tienda":tien, "categorias": categorias, "entity":productos,"ord":orden})
 
 def creatienda(request):
     categorias = categoria.objects.all()

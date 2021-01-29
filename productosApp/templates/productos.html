@@ -55,12 +55,22 @@
 
 
 
-<div class="widget filter">
+<div class="widget filter  ">
 	
 	<h4 class="widget-header">Mostrar productos</h4>
 	<div class="dropdown">
 		<button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		 <span>Ordenar por</span>  
+			{% if ord %}
+			{% if ord == "reciente" %}
+				Mas reciente
+			{% elif ord == "mayor" %}
+				Mayor precio
+			{% elif ord == "menor" %}
+				Menor precio
+			{% endif %}
+		 {% else %}
+			Mas reciente
+		 {% endif %}  
 		</button>
 		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 		<form action="" method="GET" enctype="multipart/form-data">
@@ -116,7 +126,55 @@
 				</div>
 			</div>
 			<div class="col-md-9">
-		
+				<div class="category-search-filter">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="dropdown">
+								<strong>Ordenar</strong>
+								<button class="btn btn-outline-secondary dropdown-toggle my-0 ml-3 px-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								 {% if ord %}
+									{% if ord == "reciente" %}
+										Mas reciente
+									{% elif ord == "mayor" %}
+										Mayor precio
+									{% elif ord == "menor" %}
+										Menor precio
+									{% endif %}
+								 {% else %}
+									Mas reciente
+								 {% endif %}	
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<form action="" method="GET" enctype="multipart/form-data">
+									<input style="display: none;"  value="reciente" type="text" name="ord" readonly class="form-control-plaintext" id="usid" >
+								  <button type="submit" class="dropdown-item">Mas reciente</a>
+								</form>
+								<form action="" method="GET" enctype="multipart/form-data">
+									<input style="display: none;"  value="mayor" type="text" name="ord" readonly class="form-control-plaintext" id="usid" >
+									<button type="submit" class="dropdown-item">Mayor precio</a>
+								  </form>
+								  <form action="" method="GET" enctype="multipart/form-data">
+									<input style="display: none;"  value="menor" type="text" name="ord" readonly class="form-control-plaintext" id="usid" >
+									<button type="submit" class="dropdown-item">Menor precio</a>
+								  </form>
+								</div>
+							  </div>
+						</div>
+						<div class="col-md-6">
+							<div class="view">
+								<strong>Vista</strong>
+								<ul class="list-inline view-switcher">
+									<li class="list-inline-item">
+										<a href="category.html"><i class="fa fa-th-large"></i></a>
+									</li>
+									<li class="list-inline-item">
+										<a href="category.html" class="text-info"><i class="fa fa-reorder"></i></a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="product-grid-list">
 					<div class="row mt-30">
             {% for producto in entity %}

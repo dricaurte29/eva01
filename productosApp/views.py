@@ -74,7 +74,7 @@ def productos(request):
             productos = paginator.page(page)
     except:
         raise Http404      
-    return render(request, "productos.html", {"nbn":nbn,"nb":busqueda,"entity": productos, "categorias": categorias,"paginator":paginator})
+    return render(request, "productos.html", {"ord":orden,"nbn":nbn,"nb":busqueda,"entity": productos, "categorias": categorias,"paginator":paginator})
 
 def categorias(request, cate):
     
@@ -87,6 +87,7 @@ def solo(request, producto_id):
 
     product=producto.objects.get(id= producto_id)
     comentarios = comentario.objects.filter(item_id= producto_id)
+    comentarios = comentarios.order_by('-created')
     print(product.tienda_id)
     ids= product.tienda_id
     tien=tienda.objects.get(id=ids)
@@ -99,7 +100,7 @@ def solo(request, producto_id):
     if request.method == 'POST':
         
         cm = comentario()
-        cm.contenido = request.POST.get('mensaje')
+        cm.contenido = request.POST.get('comentario')
         use = User()
         use  = User()
         use.id = int(request.POST.get('usid'))
@@ -113,6 +114,13 @@ def solo(request, producto_id):
         ite.save()
         cm.puntuacion = int(request.POST.get('puntua'))
         cm.save()
+        comentarios = comentario.objects.filter(item_id= producto_id)
+        comentarios = comentarios.order_by('-created')
+        try:
+            paginator = Paginator(comentarios, 3)
+            comentarios = paginator.page(page)
+        except:
+            raise Http404 
         messages.success(request, "Gracias por tu comentario")
         return render(request, "solo.html",{"producto":product, "tienda":tien ,"entity":comentarios})
     return render(request, "solo.html",{"producto":product, "tienda":tien ,"entity":comentarios})
