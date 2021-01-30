@@ -62,11 +62,11 @@ def productos(request):
         productos = producto.objects.filter(estatus=True)
     if mini:
         mi = int(mini)
-        productos = productos.filter(precio__gt = mi)
+        productos = productos.filter(precio__gt = mi-1)
 
     if maxi:
         ma = int(maxi)
-        productos = productos.filter(precio__lt = ma)    
+        productos = productos.filter(precio__lt = ma+1)    
     nbn = productos.count()
     if orden:
         if orden == "reciente":
@@ -81,7 +81,7 @@ def productos(request):
             productos = paginator.page(page)
     except:
         raise Http404      
-    return render(request, "productos.html", {"distro":distro,"ord":orden,"nbn":nbn,"nb":busqueda,"entity": productos, "categorias": categorias,"paginator":paginator})
+    return render(request, "productos.html", {"mi":mini,"ma":maxi,"distro":distro,"ord":orden,"nbn":nbn,"nb":busqueda,"entity": productos, "categorias": categorias,"paginator":paginator})
 
 def categorias(request, cate):
     
