@@ -266,6 +266,7 @@
                                     <i class="hpta fa fa-star-o" aria-hidden="true" id="z4"></i>
                                     <i class="hpta fa fa-star-o" aria-hidden="true" id="z5"></i> 
                                 </div>
+                                {% if user.is_authenticated %} 
                                 <div class="review-submit">
                                     <form action="#" method="POST" class="row">
                                         {% csrf_token %}
@@ -278,11 +279,55 @@
                                         <div class="col-12">
                                             <textarea name="comentario" id="review" rows="10" class="form-control" placeholder="Comentario"></textarea>
                                         </div>
+                                        
                                         <div class="col-12">
                                             <button style="background-color: #FF390F; border-color: #FF390F;" type="submit" class="btn btn-primary">Enviar</button>
                                         </div>
+                                        
+
+                                        
                                     </form>
                                 </div>
+                                {% else %}
+                                <div class="review-submit">
+                                    <div class="row">
+                                        {% csrf_token %}
+                                        <input type="number" value="{{producto.id}}" name="pid"  style="display: none;">
+                                        <input type="number" value="0" name="puntua" id="cal" style="display: none;">
+                                        <input value="{{user.id}}" type="text" name="usid" style="display: none;">
+                                    
+                                        
+
+                                        <div class="col-12">
+                                            <textarea name="comentario" id="review" rows="10" class="form-control" placeholder="Comentario"></textarea>
+                                        </div>
+                                        
+                                        
+                                            <div class="col-12 text-center mt-3">
+                                                <h4>Inicia sesión para enviar tu reseña</h4>
+                                                <ul class="list-inline text-center mt-3">
+                                                    <li class="list-inline-item" >
+                                                    <form action="{% url 'entra' %}" method="GET" enctype="multipart/form-data">
+                                                        
+                                                        <input style="display: none;"  value="{{producto.id}}" type="text" name="pr" readonly class="form-control-plaintext" id="usid" >
+                                                        <button class="btn btn-primary " style="background-color: #FF390F; border-color: #FF390F;"  type="submit" >Iniciar sesión</button>
+                                                    </form>
+                                                </li>
+                                                    <li class="list-inline-item" >
+                                                    <a class="btn btn-primary btn-lg ml-3  " style="background-color: #4267B2; border-color: #4267B2;" href="{% url 'social:begin' 'facebook' %}?next={% url 'solo' producto.id %}"> 
+                                                        <i class="fa fa-facebook "></i>&nbsp; Continúa con Facebook 
+                                                    </a>
+                                                </li> 
+                                            </ul>
+                                            </div>
+                              
+                                        
+
+                                        
+                                        </div>
+                                </div>
+                                {% endif %}
+                                
                             </div>
                         </div>
                     </div>

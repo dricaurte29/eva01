@@ -34,6 +34,13 @@ def send_email(pe):
 def productos(request):
     
     
+    dis = request.GET.get('dis')
+    if dis:
+        if dis == "a":
+            request.session['distro'] = 0
+        if dis == "b":
+            request.session['distro'] = 1
+    distro = request.session.get('distro',0)
     categorias=categoria.objects.all()
     page = request.GET.get('page',1)
     busqueda = request.GET.get('bus')
@@ -74,7 +81,7 @@ def productos(request):
             productos = paginator.page(page)
     except:
         raise Http404      
-    return render(request, "productos.html", {"ord":orden,"nbn":nbn,"nb":busqueda,"entity": productos, "categorias": categorias,"paginator":paginator})
+    return render(request, "productos.html", {"distro":distro,"ord":orden,"nbn":nbn,"nb":busqueda,"entity": productos, "categorias": categorias,"paginator":paginator})
 
 def categorias(request, cate):
     

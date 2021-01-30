@@ -262,8 +262,11 @@ def entra(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f"estas adentro {user.username}")
-                if request.GET.get('sig'):
-                    return redirect('pedido', tienda_id=request.GET.get('sig'), producto_id=request.GET.get('pr') )
+                if request.GET.get('pr'):
+                    if request.GET.get('sig'):
+                        return redirect('pedido', tienda_id=request.GET.get('sig'), producto_id=request.GET.get('pr') )
+                    else:
+                        return redirect('solo', producto_id=request.GET.get('pr'))               
                 else:
                     return redirect('/')
             else:
