@@ -10,9 +10,9 @@ from django.core.paginator import Paginator
 from django.http import Http404
 from django.core.mail import send_mail
 
-def estrella(request):
+def infor(request):
     
-    return render(request, "proyectoApp/estrella.html")
+    return render(request, "proyectoApp/tuto.html")
 
 def home(request):
     categorias=categoria.objects.all()
@@ -20,6 +20,7 @@ def home(request):
     productos=productos.order_by('?')
     tiendas=tienda.objects.all()
     tiendas=tiendas.order_by('?')
+    
     return render(request, "proyectoApp/inicio.html", {"productos": productos, "categorias": categorias, "tiendas": tiendas})
 
 
@@ -28,6 +29,8 @@ def tiendas(request):
     tien=tienda.objects.all()
     page = request.GET.get('page',1)
     busqueda = request.GET.get('bus')
+
+
     if busqueda:
         
         tien = tienda.objects.filter(
@@ -92,12 +95,24 @@ def creatienda(request):
 
 def tiendash(request, us_id):
     tien=tienda.objects.filter(autor_id= us_id)
-    return render(request, "proyectoApp/tiendash.html", {"tiendas":tien})
+    mens = request.session.get('men2',0)
+    men = 0
+    if mens == 0:
+       
+       request.session['men2'] = 1
+       men = 1
+    return render(request, "proyectoApp/tiendash.html", {"men1":men,"tiendas":tien})
 
 
      
 def dashboard(request, tienda_id):
     tien=tienda.objects.get(id= tienda_id)
+    mens = request.session.get('men0',0)
+    men = 0
+    if mens == 0:
+       
+       request.session['men0'] = 1
+       men = 1
     productos=producto.objects.filter(tienda_id= tienda_id, estatus= True)
     mac = productos.count()
     produ = producto.objects.filter(tienda_id= tienda_id, estatus= False)
@@ -110,7 +125,7 @@ def dashboard(request, tienda_id):
         productos = paginator.page(page)
     except:
         raise Http404
-    return render(request, "proyectoApp/dashboard.html", {"tienda":tien, "entity":productos, "pc":pc, "mac":mac, "arc":arc, "paginator":paginator})
+    return render(request, "proyectoApp/dashboard.html", {"men0": men,"tienda":tien, "entity":productos, "pc":pc, "mac":mac, "arc":arc, "paginator":paginator})
 
 def archivados(request, tienda_id):
     tien=tienda.objects.get(id= tienda_id)

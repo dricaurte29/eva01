@@ -245,10 +245,38 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 {% block extrajs %}
 {% endblock extrajs %}
+{% if men1 == 1 %}
+<script> 
+
+const Bien =   Swal.mixin({
+  
+  width: 600,
+  padding: '3em',
+  background: '#fff',
+  backdrop: `
+    rgba(0,0,123,0.4)
+    url("{% static 'images/gato.gif' %}")
+    left top
+    no-repeat
+  `
+})
+
+
+Bien.fire({
+  icon: 'info',
+  title: 'Gracias por unirte :)',
+  html: '<h3 class="text-center mt-3" > Aqui puedes administrar todo lo relacionado con tus tiendas, para ir al dashboard haz click sobre la tienda que quieres administrar. </h3> '+
+        '<ul class="list-inline mt-5 px-0" ><li class="list-inline-item text-left px-0" > <b>Tip:</b> </li><li class="list-inline-item" ><p class="text-left px-0" > Para más información sobre las funcionalidades del dashboard haz click sobre el botón  &nbsp;&nbsp;<i class="fa fa-question-circle"></i> &nbsp; que esta en cada pestaña del dashboard.</p></li></ul>',
+  iconColor: '#FF390F'
+})
+
+        </script>
+    {% endif %}
 {% if messages %}
     {% for m in messages %}
 
-        <script>
+    <script>
+          
           const Toast = Swal.mixin({
   toast: true,
   position: 'top-end',
@@ -260,15 +288,20 @@
     toast.addEventListener('mouseleave', Swal.resumeTimer)
   }
 })
-    
-Toast.fire({
-  icon: 'success',
-  title: '{{m}}',
-  iconColor: '#FF390F'
-})
 
-        </script>
-        
+
+</script>
+
+    <script> 
+      Toast.fire({
+        icon: 'success',
+        title: '{{m}}',
+        iconColor: '#FF390F'
+      })
+      
+              </script>
+      
+       
     {% endfor %}
 {% endif %}
 

@@ -134,5 +134,11 @@ $(function () {
       $(this).modal('show');
     });
   }
+  
 </script>
+{% if men0 == 1 %}
+<script>
+  window.onload = abrir_modalel('{% url 'tuto' %}')
+</script>
+{% endif %}
 {% endblock extrajs %}
