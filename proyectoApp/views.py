@@ -185,8 +185,18 @@ def pedi(request, tienda_id):
     
     return render(request, "proyectoApp/pedidos.html", {"tienda":tien, "entity":pedidos, "paginator":paginator,"pc":pc, "mac":mac, "arc":arc})
 
+def elpe(request, pedido_id, tienda_id):
+    tie = tienda.objects.get(id=tienda_id)
+    ped = pedido.objects.get(id=pedido_id)
+    return render(request, "proyectoApp/elpe.html", {"pedido":ped,"tienda":tie})
+def elimipe(request, pedido_id, tienda_id):
 
-    
+    ped = pedido.objects.get(id=pedido_id)
+    ped.delete()
+    messages.success(request, "Pedido eliminado")
+    ted = tienda_id
+    return redirect('pedidos', tienda_id=ted)
+
     
 def contacto(request):
     if request.method == 'POST':
