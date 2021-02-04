@@ -87,7 +87,7 @@
                 
                 <a style="border-color: #FF73CC; color: #FF73CC;" class="nav-link login-button" href="{% url 'mistiendas' user.id %}"><i class="fa fa-user"></i>  {{user.first_name}}</a>
                 {% else %}
-                <a style="border-color: #FF390F; color: #FF390F;" class="nav-link login-button" href="{% url 'productos' %}"><i class="fa fa-user"></i>  {{user.first_name}}</a>
+                <a style="border-color: #FF390F; color: #FF390F;" class="nav-link login-button" href="{% url 'mispedidos' %}"><i class="fa fa-user"></i>  {{user.first_name}}</a>
                 {% endif %}
               </li>
               <li class="nav-item">

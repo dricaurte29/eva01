@@ -6,7 +6,7 @@ import os
 class tienda(models.Model):
     nombre=models.CharField(max_length=50)
     created=models.DateField(auto_now_add=True)
-    updated=models.DateField(auto_now_add=True)
+    
     descripcion=models.CharField(max_length=100)
     autor=models.ForeignKey(User, related_name='tiendas', on_delete=models.CASCADE)
     instagram_link=models.CharField(max_length=255)
@@ -53,7 +53,7 @@ class producto(models.Model):
     estatus = models.BooleanField(default=True)
     categorian=models.CharField(max_length=25)
     created=models.DateField(auto_now_add=True)
-    updated=models.DateField(auto_now_add=True)
+    
     precio=models.IntegerField()
     nr=models.IntegerField(default=0)
     tr=models.IntegerField(default=0)
@@ -81,7 +81,7 @@ class pedido(models.Model):
     cliente = models.ForeignKey(User, related_name='pedidos', on_delete=models.CASCADE)
     local = models.ForeignKey(tienda, related_name='pedidos', on_delete=models.CASCADE)
     created=models.DateField(auto_now_add=True)
-    updated=models.DateField(auto_now_add=True)
+    
     cantidad = models.IntegerField()
     precio = models.IntegerField()
     detalle = models.CharField(max_length=100)
@@ -100,11 +100,24 @@ class comentario(models.Model):
     autor = models.ForeignKey(User, related_name='comentarios', on_delete=models.CASCADE)
     puntuacion = models.IntegerField()
     created=models.DateField(auto_now_add=True)
-    updated=models.DateField(auto_now_add=True)
+    
     contenido=models.CharField(max_length=140, null=True)
     class meta:
         verbose_name='comentario'
         verbose_name_plural='comentarios'
+
+    def __str__(self):
+        return self.item.titulo
+
+class favorito(models.Model):
+    item = models.ForeignKey(producto, related_name='produ', on_delete=models.CASCADE)
+    cliente = models.ForeignKey(User, related_name='favoritos', on_delete=models.CASCADE)
+    created=models.DateField(auto_now_add=True)
+    
+
+    class meta:
+        verbose_name='favorito'
+        verbose_name_plural='favoritos'
 
     def __str__(self):
         return self.item.titulo

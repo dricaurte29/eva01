@@ -48,7 +48,25 @@
 			<!-- Left sidebar -->
 			<div class="col-md-8">
 				<div class="product-details">
-					<h1 class="product-title">{{producto.titulo}}</h1>
+					
+                        
+                        <ul class="list-inline">
+                            <li class="list-inline-item" >
+                                {% if user.is_authenticated %}
+                                {% if fa == 0 %}
+                                <a data-toggle="tooltip" data-placement="top" title="Añadir a favoritos"  style="font-size: 1.4rem;" href="{% url 'favorit' producto.id %}" class="mb-3"><i class="fa fa-bookmark-o"></i></a>
+                                {% else %}
+                                <a data-toggle="tooltip" data-placement="top" title="Retirar de favoritos"  style="font-size: 1.4rem; color: #FF390F;" href="{% url 'unfavorit' producto.id %}" class="mb-3"><i class="fa fa-bookmark"></i></a>
+                                {% endif %}
+                                {% else %}
+                                <a data-toggle="tooltip" data-placement="top" title="Añadir a favoritos"  style="font-size: 1.4rem;" onclick="abrir_modalel('{% url 'modalfa' producto.id %}')" class="mb-3"><i class="fa fa-bookmark-o"></i></a>
+                                {% endif %}
+                            <li class="list-inline-item ml-3 ">
+                                <h1 class="product-title">{{producto.titulo}}</h1></li>
+                            </li>
+                        </ul>
+                          
+                    
 					<div class="product-meta">
 						<ul class="list-inline">
 							<li class="list-inline-item"><i class="fa fa-shopping-basket"></i> Por<a href="">{{tienda.nombre}}</a></li>

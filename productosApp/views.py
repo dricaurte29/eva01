@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from productosApp.models import producto, categoria, tienda, pedido, comentario
+from productosApp.models import producto, categoria, tienda, pedido, comentario, favorito
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.template.loader import get_template
@@ -98,6 +98,12 @@ def solo(request, producto_id):
     print(product.tienda_id)
     ids= product.tienda_id
     tien=tienda.objects.get(id=ids)
+    fa = 0
+    try:
+        if favorito.objects.get(cliente_id=request.user.id, item_id=producto_id):
+            fa = 1
+    except:
+        fa=0
     page = request.GET.get('page',1)
     try:
             paginator = Paginator(comentarios, 3)
@@ -108,7 +114,7 @@ def solo(request, producto_id):
         
         cm = comentario()
         cm.contenido = request.POST.get('comentario')
-        use = User()
+        
         use  = User()
         use.id = int(request.POST.get('usid'))
         cm.autor = use
@@ -129,8 +135,8 @@ def solo(request, producto_id):
         except:
             raise Http404 
         messages.success(request, "Gracias por tu comentario")
-        return render(request, "solo.html",{"producto":product, "tienda":tien ,"entity":comentarios})
-    return render(request, "solo.html",{"producto":product, "tienda":tien ,"entity":comentarios})
+        return render(request, "solo.html",{"producto":product, "tienda":tien ,"entity":comentarios,"fa":fa})
+    return render(request, "solo.html",{"producto":product, "tienda":tien ,"entity":comentarios,"fa":fa})
 
 def pedidos(request, tienda_id, producto_id):
     tien = tienda.objects.get(id = tienda_id)
@@ -192,6 +198,30 @@ def elimi(request, tienda_id, producto_id):
     prd.delete()
     messages.success(request, f"Producto eliminado")
     return redirect('dashboard', tienda_id= tienda_id)
+
+def favorit(request, producto_id):
+    try:
+        fa = favorito.objects.get(item_id=producto_id,cliente_id=request.user.id)
+        return redirect('solo', producto_id=producto_id)
+    except:
+        prd = producto.objects.get(id= producto_id)
+        fav = favorito()
+        use = User.objects.get(id= request.user.id)
+        fav.cliente = use
+        fav.item = prd
+        fav.save()
+        messages.success(request, "Añadido a favoritos")
+
+        return redirect('solo', producto_id=prd.id)
+        
+    
+
+def unfavorit(request, producto_id):
+    fabio = favorito.objects.get(item_id=producto_id,cliente_id=request.user.id)
+    fabio.delete()
+    messages.success(request, f"Retirado de favoritos")
+    
+    return redirect('solo', producto_id=fabio.item_id)
 
 def edit(request, tienda_id, producto_id):
     prd = producto.objects.get(id= producto_id)

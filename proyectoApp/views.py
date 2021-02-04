@@ -5,7 +5,7 @@ from .forms import usuariof
 from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.models import User
-from productosApp.models import producto, categoria, tienda, pedido
+from productosApp.models import producto, categoria, tienda, pedido, favorito
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.core.mail import send_mail
@@ -249,10 +249,38 @@ def modalel(request, producto_id):
 def modalme(request, producto_id, tienda_id):
     return render(request, "proyectoApp/modalme.html",{"pro":producto_id,"tie":tienda_id})
 
+def modalfa(request, producto_id):
+    return render(request, "proyectoApp/modalfa.html",{"pro":producto_id})
+
 def modalpe(request, pedido_id):
     ped = pedido.objects.get(id=pedido_id)
 
     return render(request, "proyectoApp/modalpe.html", {"pedido":ped})
+def dashcliente(request):
+    page = request.GET.get('page',1)
+    pedidos = pedido.objects.filter(cliente_id=request.user.id)
+    pc = pedidos.count()
+    favoritos = favorito.objects.filter(cliente_id=request.user.id)
+    pf = favoritos.count()
+    try:
+        paginator = Paginator(pedidos, 7)
+        pedidos = paginator.page(page)
+    except:
+        raise Http404
+    return render(request, "proyectoApp/dashcliente.html",{"pc":pc,"pf":pf,"entity":pedidos,"paginator":paginator})
+
+def favoritos(request):
+    page = request.GET.get('page',1)
+    favoritos = favorito.objects.filter(cliente_id=request.user.id)
+    pf = favoritos.count()
+    pedidos = pedido.objects.filter(cliente_id=request.user.id)
+    pc = pedidos.count()
+    try:
+        paginator = Paginator(favoritos, 7)
+        favoritos = paginator.page(page)
+    except:
+        raise Http404
+    return render(request, "proyectoApp/favoritos.html",{"pc":pc,"pf":pf,"entity":favoritos,"paginator":paginator})
 
 def registro(request):
     form = usuariof(data=request.POST)
@@ -290,6 +318,8 @@ def entra(request):
                 if request.GET.get('pr'):
                     if request.GET.get('sig'):
                         return redirect('pedido', tienda_id=request.GET.get('sig'), producto_id=request.GET.get('pr') )
+                    elif request.GET.get('fav'):
+                        return redirect('favorit', producto_id=request.GET.get('pr'))
                     else:
                         return redirect('solo', producto_id=request.GET.get('pr'))               
                 else:
