@@ -21,7 +21,7 @@
                 <a href="{% url 'local' tienda.url %}"><img style="width: 200px; height: 200px; object-fit: cover;" src="{{tienda.foto_perfil.url}}" alt="" class="rounded-circle"></a>
               </div>
               <!-- User Name -->
-              <a href="{% url 'local' tienda.url %}"><h5 class="text-center">{{tienda.nombre}}</h5></a>
+              <a href="{% url 'local' tienda.url %}"><h5 class="text-center mt-3">{{tienda.nombre}}</h5></a>
               <p>Desde {{tienda.created}}</p>
               
               <a style="background-color: #FF390F; border-color: #FF390F;" href="{% url 'editar' tienda.id %}" class="btn btn-primary">Editar perfil</a>
