@@ -18,13 +18,13 @@
             <div class="widget user-dashboard-profile">
               <!-- User Image -->
               <div class="profile-thumb">
-                {% for auth in backends.associated %}
+                
                     {% if auth.provider == 'facebook' %}
                 <img style="width: 200px; height: 200px; object-fit: cover;" src="{{auth.extra_data.picture.data.url}}" alt="" class="rounded-circle">
                     {% else %}
                     <img style="width: 200px; height: 200px; object-fit: cover;" src="{% static 'images/gato.gif' %}" alt="" class="rounded-circle">
                     {% endif %}
-                {% endfor %}
+                
               </div>
               <!-- User Name -->
               <h5 class="text-center mt-3">{{user.first_name}} {{user.last_name}}</h5>
