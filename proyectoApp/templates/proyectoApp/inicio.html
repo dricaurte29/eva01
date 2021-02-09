@@ -20,7 +20,7 @@
 						<ul class="list-inline">
 							{% for categoria in categorias %}
 							<li class="list-inline-item">
-								<a href="{% url 'categorias' categoria.nombre %}"><i class="fa fa-tag"></i> {{categoria.nombre}}</a></li>
+								<a href="/productos?bus={{categoria.nombre}}"><i class="fa fa-tag"></i> {{categoria.nombre}}</a></li>
 							{% endfor %}	
 						</ul>
 					</div>

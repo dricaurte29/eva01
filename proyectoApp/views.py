@@ -256,6 +256,13 @@ def modalpe(request, pedido_id):
     ped = pedido.objects.get(id=pedido_id)
 
     return render(request, "proyectoApp/modalpe.html", {"pedido":ped})
+
+def terminos(request):
+    return render(request, "proyectoApp/terminos.html")
+
+def galleta(request):
+    return render(request, "proyectoApp/galleta.html")
+
 def dashcliente(request):
     page = request.GET.get('page',1)
     pedidos = pedido.objects.filter(cliente_id=request.user.id)

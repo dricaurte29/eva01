@@ -84,21 +84,37 @@
 						</ul>
 						<ul class="navbar-nav ml-auto mt-10">
               {% if user.is_authenticated %}
-							<li class="nav-item">
+							
                 {% if user.groups.all %}
-                
-                <a style="border-color: #FF73CC; color: #FF73CC;" class="nav-link login-button" href="{% url 'mistiendas' user.id %}"><i class="fa fa-user"></i>  {{user.first_name}}</a>
-                {% else %}
-                <a style="border-color: #FF390F; color: #FF390F;" class="nav-link login-button" href="{% url 'mispedidos' %}"><i class="fa fa-user"></i>  {{user.first_name}}</a>
-                {% endif %}
+
+              <li class="nav-item">
+                <a class="nav-link login-button" href="{% url 'salir' %}"><i class="fa fa-power-off"></i>  Cerrar sesión</a>
               </li>
               <li class="nav-item">
-                <a style="border-color:#FF3E3E; background-color:#FF3E3E; color: white;" class="nav-link login-button" href="/salir"><i class="fa fa-power-off"></i> Logout</a>
+                <a data-toggle="tooltip" data-placement="top" title="Administrar tienda" style="border-color: #FF73CC; color: #FF73CC;" class="nav-link login-button" href="{% url 'mistiendas' user.id %}"><i class="fa fa-tasks"></i>  {{user.first_name}}</a>
               </li>
                 {% else %}
-                <li class="nav-item">
-                  <a class="nav-link login-button" href="/entra">Ingresa</a>
                 
+                <li class="nav-item"> 
+                <div class="dropdown">
+                  <button style="color: #ff390f;" class="btn pl-0 dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user"></i> {{user.first_name}} {{user.last_name}}
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <a  class="dropdown-item" href="{% url 'mispedidos' %}"><i class="fa fa-truck"></i>  Mis pedidos</a>
+                    <a  class="dropdown-item" href="{% url 'favoritos' %}"><i class="fa fa-bookmark"></i> Favoritos</a>
+                    <a  class="dropdown-item" href="{% url 'salir' %}"><i class="fa fa-power-off"></i> Salir</a>
+
+                  </div>
+                </div>
+                </li>
+                {% endif %}
+              
+ 
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link login-button" href="/entra">Iniciar sesión</a>
+ 
                 </li>
                 <li class="nav-item">
                   <a class="nav-link text-white add-button" href="/registro"><i class="fa fa-plus-circle"></i> Únete</a>
@@ -161,10 +177,10 @@
           
           <h4>Terminos</h4>
           <ul>
-            <li><a href="#">Condiciones de uso</a></li>
-            <li><a href="#">Uso de cookies</a></li>
+            <li><a href="{% url 'terminos' %}">Condiciones de uso</a></li>
+            <li><a href="{% url 'galleta' %}">Uso de cookies</a></li>
             
-            <li><a href="#">Uso de la información</a></li>
+            
             
 
           </ul>
