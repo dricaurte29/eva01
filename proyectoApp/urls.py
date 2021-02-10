@@ -25,6 +25,7 @@ urlpatterns = [
     path('favoritos',views.favoritos, name="favoritos"),
     path('terminos',views.terminos, name="terminos"),
     path('cookies',views.galleta, name="galleta"),
+    path('zohoverify/verifyforzoho.html',views.zoho, name="zoho"),
     path('entra', views.entra , name="entra"),
     path('salir', views.salir , name="salir"),
     path('registro', views.registro, name="registro"),

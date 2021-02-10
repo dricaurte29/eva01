@@ -263,6 +263,9 @@ def terminos(request):
 def galleta(request):
     return render(request, "proyectoApp/galleta.html")
 
+def zoho(request):
+    return render(request, "proyectoApp/verifyforzoho.html")
+
 def dashcliente(request):
     page = request.GET.get('page',1)
     pedidos = pedido.objects.filter(cliente_id=request.user.id)
