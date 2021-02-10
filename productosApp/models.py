@@ -61,10 +61,17 @@ class producto(models.Model):
     def delete(self, *args, **kwargs):
         if os.path.isfile(self.imagen.path):
             os.remove(self.imagen.path)
-        if os.path.isfile(self.imagen2.path):
-            os.remove(self.imagen2.path)
-        if os.path.isfile(self.imagen3.path):
-            os.remove(self.imagen3.path)
+        try:    
+            if os.path.isfile(self.imagen2.path):
+                os.remove(self.imagen2.path)
+
+        except:
+            b=1
+        try:
+            if os.path.isfile(self.imagen3.path):
+                os.remove(self.imagen3.path)
+        except:
+            a=0
         super(producto, self).delete(*args, **kwargs)
     class meta:
         verbose_name='post'
