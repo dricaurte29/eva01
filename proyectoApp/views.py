@@ -206,10 +206,10 @@ def elimipe(request, pedido_id, tienda_id):
     
 def contacto(request):
     if request.method == 'POST':
-        subject = "mensaje" + " " + request.POST.get('nombre')
-        message = request.POST.get('email') + "\n" + request.POST.get('mensaje')
-        email_from = "muestrastore@gmail.com"
-        recipient=["muestrastore@gmail.com"]
+        subject = "Mensaje de" + " " + request.POST.get('nombre')
+        message = request.POST.get('mensaje') + "\n" + "\n" + "@Email:  "+ request.POST.get('email')
+        email_from = "pedidos@muestra.store"
+        recipient=["gerencia@muestra.store"]
         send_mail(subject, message, email_from, recipient)
 
         return render(request, "proyectoApp/gracias.html") 

@@ -13,13 +13,12 @@ def send_email(pe):
     template = get_template('correo.html')
     mail = pe.local.autor.email
     product = pe.item
-    cl = User()
-    cl = pe.cliente
-    content = template.render({"producto":product,"pedido":pe,"cliente":cl})
+    
+    content = template.render({"producto":product,"pedido":pe})
     email = EmailMultiAlternatives(
         'Nuevo Pedido',
         'Proyecto Eva-01',
-        'muestrastore@gmail.com',
+        'pedidos@muestra.store',
         [mail]
     )
     
