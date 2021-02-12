@@ -269,6 +269,9 @@ def terminos(request):
 def galleta(request):
     return render(request, "proyectoApp/galleta.html")
 
+def privacidad(request):
+    return render(request, "proyectoApp/privacidad.html")
+
 
 
 def dashcliente(request):

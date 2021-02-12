@@ -25,7 +25,7 @@ urlpatterns = [
     path('favoritos',views.favoritos, name="favoritos"),
     path('terminos',views.terminos, name="terminos"),
     path('cookies',views.galleta, name="galleta"),
-
+    path('privacidad',views.privacidad, name="privacidad"),
     path('entra', views.entra , name="entra"),
     path('salir', views.salir , name="salir"),
     path('registro', views.registro, name="registro"),
