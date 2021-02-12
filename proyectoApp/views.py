@@ -46,7 +46,13 @@ def tiendas(request):
     return render(request, "proyectoApp/tiendas.html", {"entity":tien,"paginator":paginator})
 
 def local(request, tienda_url):
-
+    dis = request.GET.get('dis')
+    if dis:
+        if dis == "a":
+            request.session['distro'] = 0
+        if dis == "b":
+            request.session['distro'] = 1
+    distro = request.session.get('distro',0)    
     tien=tienda.objects.get(url= tienda_url)
     categorias=categoria.objects.all()
     productos=producto.objects.filter(tienda_id= tien.id)
@@ -66,7 +72,7 @@ def local(request, tienda_url):
     except:
         raise Http404 
 
-    return render(request, "proyectoApp/tienda.html",{"paginator":paginator,"tienda":tien, "categorias": categorias, "entity":productos,"ord":orden})
+    return render(request, "proyectoApp/tienda.html",{"distro":distro,"paginator":paginator,"tienda":tien, "categorias": categorias, "entity":productos,"ord":orden})
 
 def creatienda(request):
     categorias = categoria.objects.all()

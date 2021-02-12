@@ -106,10 +106,115 @@
 				</div>
 			</div>
 			<div class="col-md-8">
-
+				<div class="category-search-filter">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="dropdown">
+								<strong>Ordenar</strong>
+								<button class="btn btn-outline-secondary dropdown-toggle my-0 ml-3 px-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								 {% if ord %}
+									{% if ord == "reciente" %}
+										Mas reciente
+									{% elif ord == "mayor" %}
+										Mayor precio
+									{% elif ord == "menor" %}
+										Menor precio
+									{% endif %}
+								 {% else %}
+									Mas reciente
+								 {% endif %}	
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+									<form action="" method="GET" enctype="multipart/form-data">
+										<input style="display: none;"  value="reciente" type="text" name="ord" readonly class="form-control-plaintext" id="usid" >
+									{% if mi %}
+									<input  style="display: none;" type="number" placeholder="MIN" value="{{mi}}" name="min" class="form-control">
+									{% endif %}
+									{% if ma %}
+									<input style="display: none;" type="number" placeholder="MIN" value="{{ma}}" name="max" class="form-control">
+									{% endif %}
+										<button type="submit" class="dropdown-item">Mas reciente</a>
+									</form>
+									<form action="" method="GET" enctype="multipart/form-data">
+										<input style="display: none;"  value="mayor" type="text" name="ord" readonly class="form-control-plaintext" id="usid" >
+										{% if mi %}
+										<input  style="display: none;" type="number" placeholder="MIN" value="{{mi}}" name="min" class="form-control">
+										{% endif %}
+										{% if ma %}
+										<input style="display: none;" type="number" placeholder="MIN" value="{{ma}}" name="max" class="form-control">
+										{% endif %}
+										<button type="submit" class="dropdown-item">Mayor precio</a>
+									  </form>
+									  <form action="" method="GET" enctype="multipart/form-data">
+										<input style="display: none;"  value="menor" type="text" name="ord" readonly class="form-control-plaintext" id="usid" >
+										{% if mi %}
+										<input  style="display: none;" type="number" placeholder="MIN" value="{{mi}}" name="min" class="form-control">
+										{% endif %}
+										{% if ma %}
+										<input style="display: none;" type="number" placeholder="MIN" value="{{ma}}" name="max" class="form-control">
+										{% endif %}
+										<button type="submit" class="dropdown-item">Menor precio</a>
+									  </form>
+								</div>
+							  </div>
+						</div>
+						<div class="col-md-6">
+							<div class="view">
+								<strong>Vista</strong>
+								
+								<ul class="list-inline view-switcher">
+									
+									<li class="list-inline-item">
+										<form method="GET">
+											{% if distro == 0 %}
+											<button  data-toggle="tooltip" data-placement="top" title="Celdas" class="btn p-0" type="submit" class="text-info"><i style="color: #FF390F;" class="fa fa-th-large"></i></button>
+											{% else %}
+											<button  data-toggle="tooltip" data-placement="top" title="Celdas" class="btn p-0" type="submit" class="text-info"><i  class="fa fa-th-large"></i></button>
+											{% endif %}
+											<input style="display: none;"  value="a" type="text" name="dis"  >
+											{% if mi %}
+											<input  style="display: none;" type="number" placeholder="MIN" value="{{mi}}" name="min" class="form-control">
+											{% endif %}
+											{% if ma %}
+											<input style="display: none;" type="number" placeholder="MIN" value="{{ma}}" name="max" class="form-control">
+											{% endif %}
+											{% if ord %}
+											<input type="text" name="ord" style="display: none;" value="{{ord}}">
+											{% endif %}
+									</form>
+									</li>
+								
+								
+									<li class="list-inline-item">
+										<form method="GET">
+										{% if distro == 1 %}
+										<button  data-toggle="tooltip" data-placement="top" title="Lista" class="btn p-0" type="submit" class="text-info"><i style="color: #FF390F;" class="fa fa-reorder"></i></button>
+										{% else %}
+										<button  data-toggle="tooltip" data-placement="top" title="Lista" class="btn p-0" type="submit" class="text-info"><i  class="fa fa-reorder"></i></button>
+										{% endif %}
+										<input style="display: none;"  value="b" type="text" name="dis"  >
+										{% if mi %}
+										<input  style="display: none;" type="number" placeholder="MIN" value="{{mi}}" name="min" class="form-control">
+										{% endif %}
+										{% if ma %}
+										<input style="display: none;" type="number" placeholder="MIN" value="{{ma}}" name="max" class="form-control">
+										{% endif %}
+										{% if ord %}
+										<input type="text" name="ord" style="display: none;" value="{{ord}}">
+										{% endif %}
+									</form>
+									</li>
+								
+								</ul>
+							
+							</div>
+						</div>
+					</div>
+				</div>
+			{% if distro == 0 %}
 				<div class="product-grid-list">
 					<div class="row mt-30">
-            {% for producto in productos %}
+            {% for producto in entity %}
 						<div class="col-sm-12 col-lg-4 col-md-6">
 							<!-- product card -->
 <div class="product-item bg-light">
@@ -148,6 +253,75 @@
 
 						</div>
             {% endfor %}
+				{% else %}
+				{% for producto in entity %}
+				<div  class="ad-listing-list mt-20">
+					<div class="row p-lg-3 p-sm-5 p-4">
+						<div class="col-lg-4 align-self-center">
+							<div class="thumb-content">
+								
+								<a href="{% url 'solo' producto.id %}">
+									<img style="height: 275px; width: 420px; object-fit: contain;"  class="card-img-top img-fluid imga" src="{{producto.imagen.url}}" alt="Card image cap">
+								</a>
+							</div>
+						</div>
+						<div class="col-lg-8">
+							<div class="row">
+								<div class="col-lg-6 col-md-10">
+									<div class="ad-listing-content">
+										<div>
+											<a href="{% url 'solo' producto.id %}" class="font-weight-bold">{{producto.titulo}}</a>
+										</div>
+										<ul class="list-inline mt-2 mb-3">
+											<li class="list-inline-item"><a > <i class="fa fa-folder-open-o"></i> {{producto.categorian}}</a></li>
+											<li class="list-inline-item"><a ><i class="fa fa-calendar"></i>{{producto.created}}</a></li>
+											<li class="list-inline-item"><i class="fa fa-shopping-basket"></i> Por <a href="{% url 'local' producto.tienda.url %}"><span>{{producto.tienda.nombre}}</span></a></li>
+										</ul>
+										<ul class="list-inline mt-2 mb-3">
+											<li class="list-inline-item "><a style="color: #FF390F; font-size: x-large;" class="font-weight-bold" > <span >${{producto.precio|intcomma}}</span></a></li>
+											
+										</ul>
+										
+									</div>
+								</div>
+								<div class="col-lg-6 align-self-center">
+									<div class="product-ratings float-lg-right pb-3">
+										<ul class="list-inline">
+											{% if producto.pr >= 0.5 %}
+											<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+											{% else %}
+											<li class="list-inline-item "><i class="fa fa-star-o"></i></li>
+											{% endif %}
+											{% if producto.pr >= 1.0 %}
+											<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+											{% else %}
+											<li class="list-inline-item "><i class="fa fa-star-o"></i></li>
+											{% endif %}
+											{% if producto.pr >= 2.0 %}
+											<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+											{% else %}
+											<li class="list-inline-item "><i class="fa fa-star-o"></i></li>
+											{% endif %}
+											{% if producto.pr >= 3.6 %}
+											<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+											{% else %}
+											<li class="list-inline-item "><i class="fa fa-star-o"></i></li>
+											{% endif %}
+											{% if producto.pr >= 4.3 %}
+											<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+											{% else %}
+											<li class="list-inline-item "><i class="fa fa-star-o"></i></li>
+											{% endif %}
+						
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				{% endif %}
 					</div>
 				</div>
 				<div class="pagination justify-content-center">
