@@ -158,11 +158,11 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.zoho.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'muestrastore@gmail.com'
-EMAIL_HOST_PASSWORD = 'panochas99'
+EMAIL_HOST_USER = 'pedidos@muestra.store'
+EMAIL_HOST_PASSWORD = 'Panochas99'
 
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.facebook.FacebookOAuth2',
