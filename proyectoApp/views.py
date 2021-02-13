@@ -14,7 +14,7 @@ def infor(request):
     
     return render(request, "proyectoApp/tuto.html")
 
-def error404(request,exception):
+def error404(request):
     return render(request, "proyectoApp/404.html")
 
 
