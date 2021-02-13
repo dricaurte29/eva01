@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls import handler404
+from django.conf.urls import handler500
 
 
 urlpatterns = [
@@ -25,7 +25,7 @@ urlpatterns = [
     path('social-auth/', include('social_django.urls', namespace="social"))
     
 ]
-handler404 = 'proyectoApp.views.error404'
+handler500 = 'proyectoApp.views.error404'
 
 
 
