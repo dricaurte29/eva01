@@ -1,6 +1,9 @@
 {% extends "proyectoApp/base.html" %}
 
 {% load static %}
+{% block cabezo %}
+<title>Muestra</title>
+{% endblock cabezo %}
 {% block content %}
 
 
@@ -32,6 +35,9 @@
                                     <a style="color: #FF390F"  class="mt-3 d-block  text" href="{% url 'registro' %}">Registrarse</a>
                                 </div>
                             </div>
+                            <a class="btn btn-primary btn-lg btn-block mt-3 " style="background-color: #DB4437; border-color: #DB4437;" href="{% url 'social:begin' 'google-oauth2' %}"> 
+                                <i class="fa fa-google "></i>&nbsp;&nbsp;&nbsp;&nbsp;Continuar con Google 
+                            </a>
                             <a class="btn btn-primary btn-lg btn-block mt-3 " style="background-color: #4267B2; border-color: #4267B2;" href="{% url 'social:begin' 'facebook' %}"> 
                                 <i class="fa fa-facebook "></i>&nbsp;&nbsp;&nbsp;Continuar con Facebook 
                             </a>
