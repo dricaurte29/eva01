@@ -14,6 +14,10 @@ def infor(request):
     
     return render(request, "proyectoApp/tuto.html")
 
+def error404(request,exception):
+    return render(request, "proyectoApp/404.html")
+
+
 def home(request):
     categorias=categoria.objects.all()
     productos=producto.objects.filter(estatus= True)
