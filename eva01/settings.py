@@ -27,11 +27,7 @@ ALLOWED_HOSTS = ['212.1.214.101','127.0.0.1','localhost','muestra.store','www.mu
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
 
-SOCIAL_AUTH_FACEBOOK_KEY = "400944854322064"
-SOCIAL_AUTH_FACEBOOK_SECRET = "2088495a4fff14065689af60ce4709ba"
 
-SOCIAL_AUTH_FACEBOOK_GOOGLE_OAUTH2_KEY = "913214718641-18u8iehhq50fr8c2s3h3uu2j9pccj4mq.apps.googleusercontent.com"
-SOCIAL_AUTH_FACEBOOK_GOOGLE_OAUTH2_SECRET = "GK2c2fAttSE9pLoZJwRnvrFa"
 # Application definition
 
 SOCIAL_AUTH_RAISE_EXCEPTIONS = False
@@ -175,3 +171,8 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
+SOCIAL_AUTH_FACEBOOK_KEY = '400944854322064'
+SOCIAL_AUTH_FACEBOOK_SECRET = '2088495a4fff14065689af60ce4709ba'
+
+SOCIAL_AUTH_FACEBOOK_GOOGLE_OAUTH2_KEY = '913214718641-18u8iehhq50fr8c2s3h3uu2j9pccj4mq.apps.googleusercontent.com'
+SOCIAL_AUTH_FACEBOOK_GOOGLE_OAUTH2_SECRET = 'GK2c2fAttSE9pLoZJwRnvrFa'
