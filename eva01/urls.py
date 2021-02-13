@@ -20,8 +20,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('proyectoApp.urls')),
     path('productos', include('productosApp.urls')),
-    path('social-auth/', include('social_django.urls', namespace="social")),
-    path('accounts/', include('allauth.urls')),
+    path('social-auth/', include('social_django.urls', namespace="social"))
+#    path('accounts/', include('allauth.urls')),
 ]
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
