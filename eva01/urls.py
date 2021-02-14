@@ -21,8 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('proyectoApp.urls')),
     path('productos', include('productosApp.urls')),
-    path('social-auth/', include('social_django.urls', namespace="social")),
-    path('^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    path('social-auth/', include('social_django.urls', namespace="social"))
+    
     
 ]
 handler500 = 'proyectoApp.views.error404'
