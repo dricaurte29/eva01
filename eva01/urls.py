@@ -1,5 +1,4 @@
 """eva01 URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
 Examples:
@@ -15,7 +14,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from django.conf.urls import handler500
 
 
 urlpatterns = [
@@ -25,7 +24,7 @@ urlpatterns = [
     path('social-auth/', include('social_django.urls', namespace="social"))
     
 ]
-
+handler500 = 'proyectoApp.views.error404'
 
 
 
