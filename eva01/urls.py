@@ -14,7 +14,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls import handler500
+from django.conf.urls import handler500, handler404
 
 
 urlpatterns = [
@@ -26,6 +26,7 @@ urlpatterns = [
     
 ]
 handler500 = 'proyectoApp.views.error404'
+handler404 = 'proyectoApp.views.error'
 
 
 

@@ -17,6 +17,9 @@ def infor(request):
 def error404(request):
     return render(request, "proyectoApp/404.html")
 
+def error(request, exception):
+    return render(request, "proyectoApp/404.html")
+
 
 def home(request):
     categorias=categoria.objects.all()
