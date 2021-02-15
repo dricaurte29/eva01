@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'productosApp',
     'proyectoApp',
-    'dashboard',
+    
     'crispy_forms',
     'social_django'
 ]
