@@ -145,7 +145,7 @@ def pedidos(request, tienda_id, producto_id):
         pe = pedido()
         pe.item = product
         pe.cantidad = int(request.POST.get('cantidad'))
-        pe.contacto = int(request.POST.get('contacto'))
+        pe.contacto = request.POST.get('contacto')
         pe.direccion = request.POST.get('direccion')
         pe.detalle = request.POST.get('detalle')
         pe.precio = int(request.POST.get('total'))
