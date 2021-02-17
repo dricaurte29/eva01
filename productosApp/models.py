@@ -93,7 +93,7 @@ class pedido(models.Model):
     precio = models.IntegerField()
     detalle = models.CharField(max_length=100)
     direccion = models.CharField(max_length=100)
-    contacto = models.IntegerField()
+    contacto = models.CharField(max_length=100)
     enviado = models.BooleanField(default=False)
 
     class meta:
