@@ -34,6 +34,7 @@ SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 LOGIN_ERROR_URL = '/entra'
 
 INSTALLED_APPS = [
+    'admin_interface',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,10 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'productosApp',
     'proyectoApp',
-    
+    'import_export',
     'crispy_forms',
-    'social_django'
+    'social_django',
+    'colorfield',
 ]
+X_FRAME_OPTIONS='SAMEORIGIN'
 #    'django.contrib.sites',
 #    'allauth',
 #    'allauth.account',
