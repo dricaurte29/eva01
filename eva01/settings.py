@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '5x_053l7v6ao120*-l2&88+-_jr7pqjmjrxe8uhu(7w%-yg8k7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['212.1.214.101','127.0.0.1','localhost','muestra.store','www.muestra.store']
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
