@@ -20,3 +20,5 @@ sqlparse==0.4.0
 tqdm==4.11.2
 urllib3==1.26.2
 social-auth-app-django
+django-admin-interface
+django-import-export
