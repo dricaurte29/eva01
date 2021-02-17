@@ -1,13 +1,16 @@
 {% extends "proyectoApp/base.html" %}
 
 {% load static %}
+{% block cabezo %}
+<title>{{tienda.nombre}}</title>
+{% endblock cabezo %}
 {% block content %}
 <section class="section bg-gray">
     <div class="container">
         <div class="row">
             <div class="col-md-6 text-center mx-auto">
                 <div class="404-img">
-                    <img style="width: 200px; height: 200px; object-fit: cover;" class="rounded-circle img-fluid mb-5 px-5" src="{{tienda.foto_perfil.url}}" alt="">
+                    <img style="width: 200px;  object-fit: cover;" class="rounded-circle img-fluid mb-5 px-5" src="{{tienda.foto_perfil.url}}" alt="">
                 </div>
                 <div class="container">
                     <h3 class="display-3 pt-1 pb-2">Gracias Por tu pedido :)</h3>
