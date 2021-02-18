@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'social_django',
     'colorfield',
+    'pwa',
 ]
 X_FRAME_OPTIONS='SAMEORIGIN'
 #    'django.contrib.sites',
@@ -180,3 +181,20 @@ SOCIAL_AUTH_FACEBOOK_SECRET = '2088495a4fff14065689af60ce4709ba'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '913214718641-18u8iehhq50fr8c2s3h3uu2j9pccj4mq.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'GK2c2fAttSE9pLoZJwRnvrFa'
+
+PWA_APP_NAME = "Muestra"
+PWA_APP_DESCRIPTION = "Comunidad de emprendimientos"
+PWA_APP_THEME_COLOR = "#FF390F"
+PWA_APP_BACKGROUND_COLOR = "#FF6B4B"
+PWA_APP_ICONS = [
+    {
+        "src": "/static/images/fav.png",
+        "sizes": "200x200"
+    }
+]
+PWA_APP_ICONS_APPLE = [
+    {
+        "src": "/static/images/fav.png",
+        "sizes": "200x200"
+    }
+]
