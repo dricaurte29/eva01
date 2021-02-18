@@ -22,3 +22,4 @@ urllib3==1.26.2
 social-auth-app-django
 django-admin-interface
 django-import-export
+django-pwa
