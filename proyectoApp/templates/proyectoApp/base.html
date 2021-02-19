@@ -51,6 +51,7 @@
   
     gtag('config', 'G-K10XWGZKHE');
   </script>
+
 </head>
 
 <body class="body-wrapper">
@@ -164,9 +165,13 @@
           <img src="{% static 'images/logo-footer.png' %}" alt="">
           <!-- description -->
           <p class="alt-color">Somos una comunidad hecha por y para los emprendimientos, explora entre todas las tiendas y apoya el trabajo de alguien como tú.</p>
+        
+         
+          
         </div>
       </div>
       <!-- Link list -->
+      <!--
       <div class="col-lg-2 offset-lg-1  col-md-3">
         <div class="block">
           <h4>Paginas del sitio</h4>
@@ -179,9 +184,10 @@
           </ul>
         </div>
       </div>
+      -->
       <div class="col-lg-2 col-md-3  offset-md-1 offset-lg-0">
         <div class="block">
-          
+
             
 
           
@@ -195,12 +201,12 @@
             
 
           </ul>
-          
+        
           
         </div>
       </div>
       <!-- Link list -->
-      <div class="col-lg-2 col-md-3 offset-md-1 offset-lg-0">
+      <div class="col-lg-2 col-md-3 offset-md-1 offset-lg-0 mr-0">
         <div class="block">
           {% if user.is_authenticated %}
             
@@ -219,27 +225,26 @@
           
         </div>
       </div>
-      <!-- Promotion 
-      <div class="col-lg-4 col-md-7">
-        
-        <div class="block-2 app-promotion">
-          <div class="mobile d-flex">
-            <a href="">
-              
+      <div class="col-lg-3 col-md-3 offset-md-1 offset-lg-0 pl-5">
+        <div class="block">
+          <ul class="list-inline">
+            <li class="list-inline-item">
               <img src="{% static 'images/footer/phone-icon.png' %}" alt="mobile-icon">
-            </a>
-            <p>Get the Dealsy Mobile App and Save more</p>
-          </div>
-          <div class="download-btn d-flex my-3">
-            <a href="#"><img src="{% static 'images/apps/google-play-store.png' %}" class="img-fluid" alt=""></a>
-            <a href="#" class=" ml-3"><img src="{% static 'images/apps/apple-app-store.png' %}" class="img-fluid" alt=""></a>
-          </div>
-        </div>
+            </li>
+            <li class="list-inline-item pl-2">
+              <h4 class="text-xl-">Instala Muestra <br> en tu dispositivo </h4>
+            </li>
+
+          </ul>
+          
+          
+        <button id="instal"  style="background-color: #ff390f; border-color: #ff390f;" type="button" class="btn btn-primary  btn-lg btn-block">
+          <i class="fa fa-download"></i> Instalar</button>
       </div>
-      -->
+      </div>
     </div>
   </div>
-  <!-- Container End -->
+  
 </footer>
 <!-- Footer Bottom -->
 <footer class="footer-bottom">
@@ -293,6 +298,7 @@
 <script src="{% static 'js/script.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="{% static 'js/install.js' %}"></script>
 {% block extrajs %}
 {% endblock extrajs %}
 {% if men1 == 1 %}
