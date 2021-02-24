@@ -248,7 +248,7 @@ def solicitud(request):
         subject = "Solicitud de:" + " " + request.POST.get('nombre')
         message = "Nombre tienda:  "+request.POST.get('nombret') + "\n" + "Email:  " +request.POST.get('email')+"\n"+"Instagram:  "+request.POST.get('insta')+"\n"+("Facebook:  ")+request.POST.get('face')+"\n"+("Categoria:  ")+request.POST.get('categoria')+"\n"+"\n"+request.POST.get('mensaje')
         email_from = "pedidos@muestra.store"
-        recipient=["gerencia@muestra.store, muestrastore@gmail.com"]
+        recipient=["gerencia@muestra.store"]
         send_mail(subject, message, email_from, recipient)
 
         return render(request, "proyectoApp/graciast.html")
