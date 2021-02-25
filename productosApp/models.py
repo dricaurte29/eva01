@@ -9,9 +9,9 @@ class tienda(models.Model):
     
     descripcion=models.CharField(max_length=100)
     autor=models.ForeignKey(User, related_name='tiendas', on_delete=models.CASCADE)
-    instagram_link=models.CharField(max_length=255)
-    whatsapp_link=models.CharField(max_length=255)
-    facebook_link=models.CharField(max_length=255)
+    instagram_link=models.CharField(max_length=255, blank=True)
+    whatsapp_link=models.CharField(max_length=255, blank=True)
+    facebook_link=models.CharField(max_length=255, blank=True)
     instagram_post=models.CharField(max_length=255, blank=True)
     facebook_post=models.CharField(max_length=255, blank=True)
     foto_perfil=models.ImageField(upload_to='fototd')
