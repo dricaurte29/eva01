@@ -46,7 +46,7 @@ def tiendas(request):
             Q(categoria__icontains=busqueda) 
             ).distinct()
     try:
-            paginator = Paginator(tien, 3)
+            paginator = Paginator(tien, 12)
             tien = paginator.page(page)
     except:
         raise Http404
