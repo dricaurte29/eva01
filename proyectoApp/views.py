@@ -74,7 +74,7 @@ def local(request, tienda_url):
             productos = productos.order_by('-precio')  
     
     try:
-            paginator = Paginator(productos, 6)
+            paginator = Paginator(productos, 12)
             productos = paginator.page(page)
     except:
         raise Http404 
