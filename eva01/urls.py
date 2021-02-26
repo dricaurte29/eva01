@@ -15,6 +15,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import handler500, handler404
+from django.contrib.sitemaps.views import sitemap
+from proyectoApp.sitemaps import tiendaSitemap, staticSitemap
+
+sitemaps = {
+    'tiendas': tiendaSitemap,
+    'static': staticSitemap,
+}
 
 
 urlpatterns = [
@@ -22,7 +29,9 @@ urlpatterns = [
     path('', include('proyectoApp.urls')),
     path('productos', include('productosApp.urls')),
     path('social-auth/', include('social_django.urls', namespace="social")),
-    path('', include('pwa.urls'))
+    path('', include('pwa.urls')),
+    path('sitemap.xml',sitemap, {'sitemaps': sitemaps}),
+ 
     
     
 ]
