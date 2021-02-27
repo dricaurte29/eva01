@@ -166,9 +166,21 @@ def ipost(request, tienda_id):
     pc = pedidos.count()
     if request.method == 'POST':
         if request.POST.get('insta'):
-            tien.instagram_post = request.POST.get('insta')
+            if request.POST.get('insta').find("?") == -1:
+               tien.instagram_post = request.POST.get('insta')
+            else:
+                nu = request.POST.get('insta').find("?")
+                ins = request.POST.get('insta')[0:nu]
+                
+                tien.instagram_post = ins
         if request.POST.get('insta2'):
-            tien.facebook_post = request.POST.get('insta2')
+            if request.POST.get('insta2').find("?") == -1:
+               tien.facebook_post = request.POST.get('insta2')
+            else:
+                nu = request.POST.get('insta2').find("?")
+                ins = request.POST.get('insta2')[0:nu]
+                
+                tien.facebook_post = ins
         tien.save()
         messages.success(request, "Post actualizado")
     return render(request, "proyectoApp/ipost.html",{"tienda":tien, "pc":pc, "mac":mac, "arc":arc})
