@@ -84,4 +84,16 @@ class="active"
 
 
 {% endblock dash %}
+{% block extrajs %}
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+  function abrir_modalel(url){
+    $('#elim').load(url, function(){
+      $(this).modal('show');
+    });
+  }
+</script>
+{% endblock extrajs %}
 
