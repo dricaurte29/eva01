@@ -5,6 +5,7 @@
 <title>Muestra</title>
 {% endblock cabezo %}
 {% block content %}
+{% if user.is_authenticated %}
 <section class="page-title">
 	<!-- Container Start -->
 	<div class="container">
@@ -82,13 +83,13 @@
                      </div>
                     <div class="row">
                         <div class="col-lg-4 py-2">
-                            <input type="text" placeholder="Link Instagram *" name="insta" class="form-control" >
+                            <input type="text" placeholder="Link Instagram *" name="insta" class="form-control" required>
                         </div>
                         <div class="col-lg-4 pt-2">
-                            <input type="text" placeholder="Link Facebook *" name="face" class="form-control" >
+                            <input type="text" placeholder="Link Facebook *" name="face" class="form-control" required>
                         </div>
                         <div class="col-lg-4 pt-2">
-                            <input type="tel" placeholder="Número Whatsapp *" name="num" class="form-control" >
+                            <input type="tel" placeholder="Número Whatsapp *" name="num" class="form-control" required>
                         </div>
                     </div>
                 </div>
@@ -132,5 +133,25 @@
         </form>
 </div>
 </section>
+{% else %}
+<div class="container mt-5">
+<div class="jumbotron">
+    <h1 class="display-4">Registrate</h1>
+    <p class="lead">Crea una cuenta desde la que podras acceder a la administración de tu tienda en Muestra, recuerda registrarte con el email de tu tienda para que puedas recibir notificación de los pedidos en el email.</p>
+    <hr class="my-4">
+    <p>Si el email de tu tienda es Gmail puedes iniciar sesión directamente con esa cuenta.</p>
+    <p class="lead mt-3">
+        <form action="{% url 'registro' %}" method="GET">
+      <a class="btn btn-primary btn-lg   " style="background-color: #DB4437; border-color: #DB4437;" href="{% url 'social:begin' 'google-oauth2' %}?next={% url 'nueva' %}"> 
+        <i class="fa fa-google "></i>&nbsp; Continúa con Google 
+    </a>
+   
+        <input style="display: none;"  value="a1x9sd7d9" type="text" name="sig" readonly class="form-control-plaintext"  >
+    <button class="btn ml-3" style="color: #FF390F;" type="submit" role="button">Registrarse</button>
+</form>
+</p>
+  </div>
+</div>
+{% endif %}
 {% endblock %}
 
