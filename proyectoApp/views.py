@@ -9,6 +9,7 @@ from productosApp.models import producto, categoria, tienda, pedido, favorito
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.core.mail import send_mail
+from django.contrib.auth.models import Group
 
 def infor(request):
     
@@ -82,6 +83,8 @@ def local(request, tienda_url):
     return render(request, "proyectoApp/tienda.html",{"distro":distro,"paginator":paginator,"tienda":tien, "categorias": categorias, "entity":productos,"ord":orden})
 
 def creatienda(request):
+    
+        
     categorias = categoria.objects.all()
     if request.method == 'POST':
         ti = tienda()
@@ -102,10 +105,12 @@ def creatienda(request):
         us.id = int(request.POST.get('usid'))
         ti.autor = us
         ti.save()
+        gru = Group.objects.get(name='Vendedor')
+        gru.user_set.add(request.user)
+        gru.save()
         messages.success(request, "Tienda Creada")
-        return redirect('inicio')
+        return redirect('mistiendas', us_id=request.user.id)
     return render(request, "proyectoApp/tform.html",{"categorias":categorias})
-
 def tiendash(request, us_id):
     tien=tienda.objects.filter(autor_id= us_id)
     mens = request.session.get('men2',0)
@@ -327,8 +332,11 @@ def registro(request):
             form.save()
             user = authenticate(username=form.cleaned_data["username"], password=form.cleaned_data["password1"])
             login(request, user)
-            messages.success(request, "Bien hecho")  
-            return redirect('/')
+            messages.success(request, "Bien hecho")
+            if request.GET.get('sig'):
+                return redirect('/nuevatienda')
+            else:
+                return redirect('/')
         except:
             messages.info(request, "Datos erroneos")
             return redirect('/registro')
