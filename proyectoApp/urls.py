@@ -34,6 +34,7 @@ urlpatterns = [
     path('editar/<int:tienda_id>/',views.editienda, name="editar"),
     path('nuevatienda',views.creatienda, name ="nueva"),
     path('accounts/profile/',views.home, name="inicio"),
+    path('materiales/proyecto',views.materiales, name="materiales"),
     
 ]
 
