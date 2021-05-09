@@ -11,6 +11,65 @@ from django.http import Http404
 from django.core.mail import send_mail
 from django.contrib.auth.models import Group
 
+def materiales(request):
+    if request.method == 'POST':
+       m1 = [77000,460,7.8,10000,"ASTM A913"]
+       m2 = [75000,530,8,17000,"AISI 302"]
+       m3 = [28000,510,2.81,28000,"7075 T6"]
+       m4 = [78000,772,7.85,19000,"AISI 1095"]
+       m = [m1,m2,m3,m4]
+       a1=int(request.POST.get('a1'))
+       t1=int(request.POST.get('t1'))
+       a2=int(request.POST.get('a2'))
+       t2=int(request.POST.get('t2'))
+       a3=int(request.POST.get('a3'))
+       t3=int(request.POST.get('t3'))
+       d1=int(request.POST.get('d1'))
+       g1=int(request.POST.get('g1'))
+       d2=int(request.POST.get('d2'))
+       g2=int(request.POST.get('g2'))
+       d3=int(request.POST.get('d3'))
+       g3=int(request.POST.get('g3'))
+       n1=int(request.POST.get('m1'))
+       n2=int(request.POST.get('m2'))
+       n3=int(request.POST.get('m3'))
+       mp1 = m[n1-1]
+       l1=((a1*(pi/180))/t1)*(mp1[0]*(pi/32)*((d1**4)-(d1-(2*g1))**4))
+       
+       tl1=((a2-a1)*pi*mp1[0]*(pi/32)*((d1**4)-(d1-(2*g1))**4))/(180*l1)
+       tl2=t2-tl1
+       mp2 = m[n2-1] 
+       l2=(((a2-a1)*(pi/180))/tl2)*(mp2[0]*(pi/32)*((d2**4)-(d2-(2*g2))**4))
+       
+       tl1=((a3-a2)*pi*mp1[0]*(pi/32)*((d1**4)-(d1-(2*g1))**4))/(180*l1)
+       tl2=((a3-a2)*pi*mp2[0]*(pi/32)*((d2**4)-(d2-(2*g2))**4))/(180*l2)
+       tl3=t3-(tl1+tl2)
+       mp3 = m[n3-1]
+       l3=(((a3-a2)*(pi/180))/tl3)*(mp3[0]*(pi/32)*((d3**4)-(d3-(2*g3))**4))
+       
+       ar1=(pi*((d1/2)**2))-(pi*(((d1/2)-g1)**2))
+       vl1=(ar1*l1)/1000
+       p1=((vl1*mp1[2])/1000)*mp1[3]
+       ar2=(pi*((d2/2)**2))-(pi*(((d2/2)-g2)**2))
+       vl2=(ar2*l2)/1000
+       p2=((vl2*mp2[2])/1000)*mp2[3]
+       ar3=(pi*((d3/2)**2))-(pi*(((d3/2)-g3)**2))
+       vl3=(ar3*l3)/1000
+       p3=((vl3*mp3[2])/1000)*mp3[3]
+       l3="{0:.3f}".format(l3)
+       l2="{0:.3f}".format(l2)
+       l1="{0:.3f}".format(l1)
+       pt="{0:.3f}".format(p1+p2+p3)
+       
+       fs1="{0:.3f}".format((0.577*mp1[1])/((16*tl1*d1)/(pi*((d1**4)-(d1-(2*g1))**4))))
+       fs2="{0:.3f}".format((0.577*mp2[1])/((16*tl2*d2)/(pi*((d2**4)-(d2-(2*g2))**4))))
+       fs3="{0:.3f}".format((0.577*mp3[1])/((16*tl3*d3)/(pi*((d3**4)-(d3-(2*g3))**4))))
+       fst=max([fs1,fs2,fs3])
+
+       return render(request, "proyectoApp/mreport.html", {"a1":a1,"a2":a2,"a3":a3,"t1":t1,"t2":t2,"t3":t3,"l1":l1,"l2":l2,"l3":l3,"d1":d1,"d2":d2,"d3":d3,"g1":g1,"g2":g2,"g3":g3,"pt":pt,"fs":fst,"m1":mp1[4],"m2":mp2[4],"m3":mp3[4]}) 
+    return render(request, "proyectoApp/materiales.html")
+
+
 def infor(request):
     
     return render(request, "proyectoApp/tuto.html")
